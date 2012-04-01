@@ -11,4 +11,6 @@
 
 require_once __DIR__.'/../lib/Negotiator.php';
 require_once __DIR__.'/../lib/AcceptLike.php';
+require_once __DIR__.'/../lib/Accept.php';
+require_once __DIR__.'/../lib/AcceptLanguage.php';
 require_once __DIR__.'/../lib/AcceptLikeList.php';
