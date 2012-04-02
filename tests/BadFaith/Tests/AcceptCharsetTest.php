@@ -35,35 +35,36 @@ namespace BadFaith\Tests;
 
 use AcceptCharset;
 
-class AcceptTestCharset extends \PHPUnit_Framework_TestCase {
+class AcceptTestCharset extends \PHPUnit_Framework_TestCase
+{
 
-  public function setUp() {
-    $this->headers = array (
-      'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'accept_encoding' => 'gzip,deflate,sdch',
-      'accept_language' => 'en-US,en;q=0.8',
-      'accept_charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-    );
-    $this->accept_charset_split = array(
-      'ISO-8859-1',
-      'utf-8;q=0.7',
-      '*;q=0.3',
-    );
-  }
+    public function setUp() {
+        $this->headers = array (
+            'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'accept_encoding' => 'gzip,deflate,sdch',
+            'accept_language' => 'en-US,en;q=0.8',
+            'accept_charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+        );
+        $this->accept_charset_split = array(
+            'ISO-8859-1',
+            'utf-8;q=0.7',
+            '*;q=0.3',
+        );
+    }
 
-  public function testInitWithString() {
-    $accept_charset = new \BadFaith\AcceptCharset($this->accept_charset_split[0]);
-    $expected = new \BadFaith\AcceptCharset();
-    $expected->pref = 'ISO-8859-1';
-    $expected->charset = 'ISO-8859-1';
-    $expected->params = array();
-    $expected->q = 1.0;
-    $this->assertEquals($expected, $accept_charset);
-    $accept_charset = new \BadFaith\AcceptCharset($this->accept_charset_split[1]);
-    $expected->pref = 'utf-8';
-    $expected->charset = 'utf-8';
-    $expected->params = array();
-    $expected->q = 0.7;
-    $this->assertEquals($expected, $accept_charset);
-  }
+    public function testInitWithString() {
+        $accept_charset = new \BadFaith\AcceptCharset($this->accept_charset_split[0]);
+        $expected = new \BadFaith\AcceptCharset();
+        $expected->pref = 'ISO-8859-1';
+        $expected->charset = 'ISO-8859-1';
+        $expected->params = array();
+        $expected->q = 1.0;
+        $this->assertEquals($expected, $accept_charset);
+        $accept_charset = new \BadFaith\AcceptCharset($this->accept_charset_split[1]);
+        $expected->pref = 'utf-8';
+        $expected->charset = 'utf-8';
+        $expected->params = array();
+        $expected->q = 0.7;
+        $this->assertEquals($expected, $accept_charset);
+    }
 }

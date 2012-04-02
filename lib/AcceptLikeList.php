@@ -34,34 +34,34 @@ namespace BadFaith;
  */
 class AcceptLikeList {
 
-  public $items;
+    public $items;
 
-  function __construct($header_str = NULL) {
-    if ($header_str) {
-      $this->init_with_str($header_str);
+    function __construct($headerStr = NULL) {
+        if ($headerStr) {
+            $this->initWithStr($headerStr);
+        }
     }
-  }
 
-  function init_with_str($header_str) {
-    $this->items = self::pref_parse($header_str);
-  }
+    function initWithStr($headerStr) {
+        $this->items = self::prefParse($headerStr);
+    }
 
-  static function pref_parse($header_str) {
-    $parts = self::pref_split($header_str);
-    $f = function ($str) {return new AcceptLike($str);};
-    return array_map($f, $parts);
-  }
+    static function prefParse($headerStr) {
+        $parts = self::prefSplit($headerStr);
+        $f = function ($str) {return new AcceptLike($str);};
+        return array_map($f, $parts);
+    }
 
-  /**
-   * Given an Accept* request-header field string, returns an array of
-   * preference with parameters strings.
-   * @param string $pref_with_params
-   * @return array
-   */
-  public static function pref_split($pref_with_params) {
-    $parts = array_filter(explode (',', $pref_with_params));
-    $parts = array_map('trim', $parts);
-    reset($parts);
-    return $parts;
-  }
+    /**
+     * Given an Accept* request-header field string, returns an array of
+     * preference with parameters strings.
+     * @param string $prefWithParams
+     * @return array
+     */
+    public static function prefSplit($prefWithParams) {
+        $parts = array_filter(explode (',', $prefWithParams));
+        $parts = array_map('trim', $parts);
+        reset($parts);
+        return $parts;
+    }
 }

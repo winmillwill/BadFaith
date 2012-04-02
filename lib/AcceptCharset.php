@@ -33,30 +33,30 @@ namespace BadFaith;
  */
 class AcceptCharset extends AcceptLike {
 
-  public $pref;
-  public $params;
-  public $q;
-  public $charset;
+    public $pref;
+    public $params;
+    public $q;
+    public $charset;
 
-  function __construct($header_str = NULL) {
-    parent::__construct($header_str);
-    $this->init();
-  }
-
-  static function __set_state(array $properties) {
-    parent::__set_state($properties);
-    $accept = new AcceptCharset();
-    foreach ($properties as $key=>$prop) {
-      if (!property_exists('AcceptLike', $key)) {
-        if (property_exists($accept, $key)) {
-          $accept->$key = $prop;
-        }
-      }
+    function __construct($headerStr = NULL) {
+        parent::__construct($headerStr);
+        $this->init();
     }
-    return $accept_like;
-  }
 
-  function init() {
-    $this->charset = $this->pref;
-  }
+    static function __set_state(array $properties) {
+        parent::__set_state($properties);
+        $accept = new AcceptCharset();
+        foreach ($properties as $key=>$prop) {
+            if (!property_exists('AcceptLike', $key)) {
+                if (property_exists($accept, $key)) {
+                    $accept->$key = $prop;
+                }
+            }
+        }
+        return $acceptLike;
+    }
+
+    function init() {
+        $this->charset = $this->pref;
+    }
 }

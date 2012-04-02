@@ -35,44 +35,45 @@ namespace BadFaith\Tests;
 
 use Accept;
 
-class AcceptTest extends \PHPUnit_Framework_TestCase {
+class AcceptTest extends \PHPUnit_Framework_TestCase
+{
 
-  public function setUp() {
-    $this->headers = array (
-      'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'accept_encoding' => 'gzip,deflate,sdch',
-      'accept_language' => 'en-US,en;q=0.8',
-      'accept_charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-    );
-    $this->accept_split = array(
-      'text/html;level=2;q=0.7',
-      'text/html',
-      'application/xhtml+xml',
-      'application/xml;q=0.9',
-      '*/*;q=0.8'
-    );
-    $this->accept_pref_param_split = array(
-      'pref' => 'text/html',
-      'params' => 'level=2;q=0.7',
-    );
-    $this->accept_pref_param_split_moreso = array(
-      'pref' => 'text/html',
-      'params' => array('level=2', 'q=0.7'),
-    );
-    $this->accept_pref_params_parsed = array(
-      'pref' => 'text/html',
-      'params' => array('level' => '2', 'q' => '0.7'),
-    );
-  }
+    public function setUp() {
+        $this->headers = array (
+            'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'acceptEncoding' => 'gzip,deflate,sdch',
+            'acceptLanguage' => 'en-US,en;q=0.8',
+            'acceptCharset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+        );
+        $this->acceptSplit = array(
+            'text/html;level=2;q=0.7',
+            'text/html',
+            'application/xhtml+xml',
+            'application/xml;q=0.9',
+            '*/*;q=0.8'
+        );
+        $this->acceptPrefParamSplit = array(
+            'pref' => 'text/html',
+            'params' => 'level=2;q=0.7',
+        );
+        $this->acceptPrefParamSplitMoreso = array(
+            'pref' => 'text/html',
+            'params' => array('level=2', 'q=0.7'),
+        );
+        $this->acceptPrefParamsParsed = array(
+            'pref' => 'text/html',
+            'params' => array('level' => '2', 'q' => '0.7'),
+        );
+    }
 
-  public function testInitWithString() {
-    $accept = new \BadFaith\Accept($this->accept_split[0]);
-    $expected = new \BadFaith\Accept();
-    $expected->pref = 'text/html';
-    $expected->params = array('level' => '2');
-    $expected->q = 0.7;
-    $expected->type = 'text';
-    $expected->subtype = 'html';
-    $this->assertEquals($expected, $accept);
-  }
+    public function testInitWithString() {
+        $accept = new \BadFaith\Accept($this->acceptSplit[0]);
+        $expected = new \BadFaith\Accept();
+        $expected->pref = 'text/html';
+        $expected->params = array('level' => '2');
+        $expected->q = 0.7;
+        $expected->type = 'text';
+        $expected->subtype = 'html';
+        $this->assertEquals($expected, $accept);
+    }
 }

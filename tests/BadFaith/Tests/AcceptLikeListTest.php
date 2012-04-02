@@ -35,61 +35,74 @@ namespace BadFaith\Tests;
 
 use AcceptLikeList;
 
-class AcceptLikeListTest extends \PHPUnit_Framework_TestCase {
+class AcceptLikeListTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * Sets up our fixtures.
+     */
+    public function setUp() {
+        $this->headers = array (
+            'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'acceptEncoding' => 'gzip,deflate,sdch',
+            'acceptLanguage' => 'en-US,en;q=0.8',
+            'acceptCharset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+        );
+        $this->acceptSplit = array(
+            'text/html;level=2;q=0.7',
+            'text/html',
+            'application/xhtml+xml',
+            'application/xml;q=0.9',
+            '*/*;q=0.8'
+        );
+        $this->acceptParsed = array(
+            \BadFaith\AcceptLike::__set_state(
+                array(
+                    'pref' => 'text/html',
+                    'params' => array('level' => '2'),
+                    'q' => '0.7',
+                )
+            ),
+            \BadFaith\AcceptLike::__set_state(
+                array(
+                    'pref' => 'text/html',
+                    'params' => array(),
+                    'q' => 1.0,
+                )
+            ),
+            \BadFaith\AcceptLike::__set_state(
+                array(
+                    'pref' => 'application/xhtml+xml',
+                    'params' => array(),
+                    'q' => 1.0,
+                )
+            ),
+            \BadFaith\AcceptLike::__set_state(
+                array(
+                    'pref' => 'application/xml',
+                    'params' => array(),
+                    'q' => 0.9,
+                )
+            ),
+            \BadFaith\AcceptLike::__set_state(
+                array(
+                    'pref' => '*/*',
+                    'params' => array(),
+                    'q' => 0.8,
+                )
+            ),
+        );
+    }
 
-  public function setUp() {
-    $this->headers = array (
-      'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'accept_encoding' => 'gzip,deflate,sdch',
-      'accept_language' => 'en-US,en;q=0.8',
-      'accept_charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-    );
-    $this->accept_split = array(
-      'text/html;level=2;q=0.7',
-      'text/html',
-      'application/xhtml+xml',
-      'application/xml;q=0.9',
-      '*/*;q=0.8'
-    );
-    $this->accept_parsed = array(
-      \BadFaith\AcceptLike::__set_state(array(
-          'pref' => 'text/html',
-          'params' => array('level' => '2'),
-          'q' => '0.7',
-        )),
-      \BadFaith\AcceptLike::__set_state(array(
-          'pref' => 'text/html',
-          'params' => array(),
-          'q' => 1.0,
-        )),
-      \BadFaith\AcceptLike::__set_state(array(
-          'pref' => 'application/xhtml+xml',
-          'params' => array(),
-          'q' => 1.0,
-        )),
-      \BadFaith\AcceptLike::__set_state(array(
-          'pref' => 'application/xml',
-          'params' => array(),
-          'q' => 0.9,
-        )),
-      \BadFaith\AcceptLike::__set_state(array(
-          'pref' => '*/*',
-          'params' => array(),
-          'q' => 0.8,
-        )),
-    );
-  }
+    public function testPrefSplit() {
+        $accept = $this->headers['accept'];
+        $expected = $this->acceptSplit;
+        $this->assertEquals($expected, \BadFaith\AcceptLikeList::prefSplit($accept));
+    }
 
-  public function testPrefSplit() {
-    $accept = $this->headers['accept'];
-    $expected = $this->accept_split;
-    $this->assertEquals($expected, \BadFaith\AcceptLikeList::pref_split($accept));
-  }
-
-  public function testInitWithHeaderString () {
-    $expected = $this->accept_parsed;
-    $accept = $this->headers['accept'];
-    $list = new \BadFaith\AcceptLikeList($accept);
-    $this->assertEquals($expected, $list->items);
-  }
+    public function testInitWithHeaderString () {
+        $expected = $this->acceptParsed;
+        $accept = $this->headers['accept'];
+        $list = new \BadFaith\AcceptLikeList($accept);
+        $this->assertEquals($expected, $list->items);
+    }
 }

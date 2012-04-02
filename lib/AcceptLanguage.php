@@ -33,36 +33,36 @@ namespace BadFaith;
  */
 class AcceptLanguage extends AcceptLike {
 
-  public $pref;
-  public $params;
-  public $q;
-  public $type;
-  public $subtype;
+    public $pref;
+    public $params;
+    public $q;
+    public $type;
+    public $subtype;
 
-  function __construct($header_str = NULL) {
-    parent::__construct($header_str);
-    $this->init();
-  }
+    function __construct($headerStr = NULL) {
+        parent::__construct($headerStr);
+        $this->init();
+    }
 
-  static function __set_state(array $properties) {
-    parent::__set_state($properties);
-    $accept = new AcceptLanguage();
-    foreach ($properties as $key=>$prop) {
-      if (!property_exists('AcceptLike', $key)) {
-        if (property_exists($accept, $key)) {
-          $accept->$key = $prop;
+    static function __set_state(array $properties) {
+        parent::__set_state($properties);
+        $accept = new AcceptLanguage();
+        foreach ($properties as $key=>$prop) {
+            if (!property_exists('AcceptLike', $key)) {
+                if (property_exists($accept, $key)) {
+                    $accept->$key = $prop;
+                }
+            }
         }
-      }
+        return $accept;
     }
-    return $accept_like;
-  }
 
-  function init() {
-    $parts = explode('-', $this->pref, 2);
-    if (!array_key_exists(1, $parts)) {
-      $parts[1] = NULL;
+    function init() {
+        $parts = explode('-', $this->pref, 2);
+        if (!array_key_exists(1, $parts)) {
+            $parts[1] = NULL;
+        }
+        $this->lang = $parts[0];
+        $this->sublang = $parts[1];
     }
-    $this->lang = $parts[0];
-    $this->sublang = $parts[1];
-  }
 }

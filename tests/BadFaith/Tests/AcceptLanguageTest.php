@@ -35,35 +35,35 @@ namespace BadFaith\Tests;
 
 use AcceptLanguage;
 
-class AcceptLanguageTest extends \PHPUnit_Framework_TestCase {
+class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
+{
+    public function setUp() {
+        $this->headers = array (
+            'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'acceptEncoding' => 'gzip,deflate,sdch',
+            'acceptLanguage' => 'en-US,en;q=0.8',
+            'acceptCharset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+        );
+        $this->acceptLanguageSplit = array(
+            'en-US',
+            'en;q=0.8',
+        );
+    }
 
-  public function setUp() {
-    $this->headers = array (
-      'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'accept_encoding' => 'gzip,deflate,sdch',
-      'accept_language' => 'en-US,en;q=0.8',
-      'accept_charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-    );
-    $this->accept_language_split = array(
-      'en-US',
-      'en;q=0.8',
-    );
-  }
-
-  public function testInitWithString() {
-    $accept = new \BadFaith\AcceptLanguage($this->accept_language_split[0]);
-    $expected = new \BadFaith\AcceptLanguage();
-    $expected->pref = 'en-US';
-    $expected->params = array();
-    $expected->q = 1.0;
-    $expected->lang = 'en';
-    $expected->sublang = 'US';
-    $this->assertEquals($expected, $accept);
-    $accept = new \BadFaith\AcceptLanguage($this->accept_language_split[1]);
-    $expected->pref = 'en';
-    $expected->lang = 'en';
-    $expected->sublang = NULL;
-    $expected->q = 0.8;
-    $this->assertEquals($expected, $accept);
-  }
+    public function testInitWithString() {
+        $accept = new \BadFaith\AcceptLanguage($this->acceptLanguageSplit[0]);
+        $expected = new \BadFaith\AcceptLanguage();
+        $expected->pref = 'en-US';
+        $expected->params = array();
+        $expected->q = 1.0;
+        $expected->lang = 'en';
+        $expected->sublang = 'US';
+        $this->assertEquals($expected, $accept);
+        $accept = new \BadFaith\AcceptLanguage($this->acceptLanguageSplit[1]);
+        $expected->pref = 'en';
+        $expected->lang = 'en';
+        $expected->sublang = NULL;
+        $expected->q = 0.8;
+        $this->assertEquals($expected, $accept);
+    }
 }

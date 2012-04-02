@@ -33,82 +33,82 @@ namespace BadFaith;
  */
 class AcceptLike {
 
-  public $pref;
-  public $params;
-  public $q;
+    public $pref;
+    public $params;
+    public $q;
 
-  function __construct($header_str = NULL) {
-    if ($header_str) {
-      $this->init_with_str($header_str);
+    function __construct($headerStr = NULL) {
+        if ($headerStr) {
+            $this->initWithStr($headerStr);
+        }
     }
-  }
 
-  static function __set_state(array $properties) {
-    $accept_like = new AcceptLike();
-    foreach ($properties as $key=>$prop) {
-      if (property_exists($accept_like, $key)) {
-        $accept_like->$key = $prop;
-      }
+    static function __set_state(array $properties) {
+        $acceptLike = new AcceptLike();
+        foreach ($properties as $key=>$prop) {
+            if (property_exists($acceptLike, $key)) {
+                $acceptLike->$key = $prop;
+            }
+        }
+        return $acceptLike;
     }
-    return $accept_like;
-  }
 
-  function init_with_str($header_str) {
-    $tuple = self::pref_param_split($header_str);
-    $tuple['params'] = self::param_list_parse($tuple['params']);
-    $q = $tuple['params']['q'];
-    unset($tuple['params']['q']);
-    $this->params = $tuple['params'];
-    $this->q = $q;
-    $this->pref = $tuple['pref'];
-  }
-
-  /**
-   * Given an Accept* request-header field string, returns an array of
-   * preference with parameters strings.
-   * @param string $pref_with_params
-   * @return array
-   */
-  public static function pref_split($pref_with_params) {
-    $parts = array_filter(explode (',', $pref_with_params));
-    $parts = array_map('trim', $parts);
-    reset($parts);
-    return $parts;
-  }
-
-  /**
-   * Given an Accept* request-header field preference string, returns an array
-   * representing a preference-parameters tuple
-   * @see pref_split
-   * @param string $pref_param_list_str
-   * @return array
-   */
-  static function pref_param_split($pref_param_list_str) {
-    $parts = explode(';', $pref_param_list_str, 2);
-    $parts = array_map('trim', $parts);
-    if (!array_key_exists(1, $parts)) {
-      $parts[1] = '';
+    function initWithStr($headerStr) {
+        $tuple = self::prefParamSplit($headerStr);
+        $tuple['params'] = self::paramListParse($tuple['params']);
+        $q = $tuple['params']['q'];
+        unset($tuple['params']['q']);
+        $this->params = $tuple['params'];
+        $this->q = $q;
+        $this->pref = $tuple['pref'];
     }
-    reset($parts);
-    return array('pref' => $parts[0], 'params' => $parts[1]);
-  }
 
-  /**
-   * Given an Accept* request-header field preference parameter list string,
-   * returns an array of values keyed by parameter name.
-   * @see pref_param_split
-   * @param string $param_list_str
-   * @return array
-   */
-  static function param_list_parse($param_list_str) {
-    $params_url_style = strtr($param_list_str, ';', '&');
-    parse_str($params_url_style, $params);
-    if (array_key_exists('q', $params)) {
-      (float) $params['q'];
+    /**
+     * Given an Accept* request-header field string, returns an array of
+     * preference with parameters strings.
+     * @param string $prefWithParams
+     * @return array
+     */
+    public static function prefSplit($prefWithParams) {
+        $parts = array_filter(explode (',', $prefWithParams));
+        $parts = array_map('trim', $parts);
+        reset($parts);
+        return $parts;
     }
-    else {
-      $params['q'] = 1.0;
+
+    /**
+     * Given an Accept* request-header field preference string, returns an array
+     * representing a preference-parameters tuple
+     * @see prefSplit
+     * @param string $prefParamListStr
+     * @return array
+     */
+    static function prefParamSplit($prefParamListStr) {
+        $parts = explode(';', $prefParamListStr, 2);
+        $parts = array_map('trim', $parts);
+        if (!array_key_exists(1, $parts)) {
+            $parts[1] = '';
+        }
+        reset($parts);
+        return array('pref' => $parts[0], 'params' => $parts[1]);
     }
-    return $params;
-  }
+
+    /**
+     * Given an Accept* request-header field preference parameter list string,
+     * returns an array of values keyed by parameter name.
+     * @see prefParamSplit
+     * @param string $paramListStr
+     * @return array
+     */
+    static function paramListParse($paramListStr) {
+        $paramsUrlStyle = strtr($paramListStr, ';', '&');
+        parse_str($paramsUrlStyle, $params);
+        if (array_key_exists('q', $params)) {
+            (float) $params['q'];
+        }
+        else {
+            $params['q'] = 1.0;
+        }
+        return $params;
+    }
 }

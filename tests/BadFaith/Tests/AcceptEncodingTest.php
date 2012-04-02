@@ -35,29 +35,30 @@ namespace BadFaith\Tests;
 
 use AcceptEncoding;
 
-class AcceptEncodingTest extends \PHPUnit_Framework_TestCase {
+class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
+{
 
-  public function setUp() {
-    $this->headers = array (
-      'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-      'accept_encoding' => 'gzip,deflate,sdch',
-      'accept_language' => 'en-US,en;q=0.8',
-      'accept_charset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-    );
-    $this->accept_encoding_split = array(
-      'gzip',
-      'deflate',
-      'sdch',
-    );
-  }
+    public function setUp() {
+        $this->headers = array (
+            'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'acceptEncoding' => 'gzip,deflate,sdch',
+            'acceptLanguage' => 'en-US,en;q=0.8',
+            'acceptCharset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+        );
+        $this->acceptEncodingSplit = array(
+            'gzip',
+            'deflate',
+            'sdch',
+        );
+    }
 
-  public function testInitWithString() {
-    $accept_encoding = new \BadFaith\AcceptEncoding($this->accept_encoding_split[0]);
-    $expected = new \BadFaith\AcceptEncoding();
-    $expected->pref = 'gzip';
-    $expected->encoding = 'gzip';
-    $expected->params = array();
-    $expected->q = 1.0;
-    $this->assertEquals($expected, $accept_encoding);
-  }
+    public function testInitWithString() {
+        $acceptEncoding = new \BadFaith\AcceptEncoding($this->acceptEncodingSplit[0]);
+        $expected = new \BadFaith\AcceptEncoding();
+        $expected->pref = 'gzip';
+        $expected->encoding = 'gzip';
+        $expected->params = array();
+        $expected->q = 1.0;
+        $this->assertEquals($expected, $acceptEncoding);
+    }
 }
