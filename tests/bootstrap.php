@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-require_once __DIR__.'/../lib/Negotiator.php';
-require_once __DIR__.'/../lib/AcceptLike.php';
-require_once __DIR__.'/../lib/Accept.php';
-require_once __DIR__.'/../lib/AcceptLanguage.php';
-require_once __DIR__.'/../lib/AcceptEncoding.php';
-require_once __DIR__.'/../lib/AcceptCharset.php';
-require_once __DIR__.'/../lib/AcceptLikeList.php';
+require_once __DIR__.'/../lib/BadFaith/Negotiator.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptLike.php';
+require_once __DIR__.'/../lib/BadFaith/Accept.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptLanguage.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptEncoding.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptCharset.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptLikeList.php';
