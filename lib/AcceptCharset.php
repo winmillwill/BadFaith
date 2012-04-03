@@ -26,24 +26,34 @@
 
 namespace BadFaith;
 /**
- * BadFaith container for Accept-* parsing
+ * BadFaith container for Accept-Charset parsing
  *
  * @package BadFaith
- * @author William Milton
+ * @author William Milton <wa.milton@gmail.com>
  */
-class AcceptCharset extends AcceptLike {
+class AcceptCharset extends AcceptLike
+{
 
     public $pref;
     public $params;
     public $q;
     public $charset;
 
-    function __construct($headerStr = NULL) {
+    /**
+     * @param string|null $headerStr the raw test of the header string or null
+     */
+    function __construct($headerStr = null)
+    {
         parent::__construct($headerStr);
         $this->init();
     }
 
-    static function __set_state(array $properties) {
+    /**
+     * @param array $properties the array this method always gets
+     * @return Accept the object version of that array
+     */
+    static function __set_state(array $properties)
+    {
         parent::__set_state($properties);
         $accept = new AcceptCharset();
         foreach ($properties as $key=>$prop) {
@@ -53,10 +63,14 @@ class AcceptCharset extends AcceptLike {
                 }
             }
         }
-        return $acceptLike;
+        return $accept;
     }
 
-    function init() {
+    /**
+     * Initializes attributes unique to this subclass.
+     */
+    function init()
+    {
         $this->charset = $this->pref;
     }
 }

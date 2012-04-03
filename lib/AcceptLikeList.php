@@ -30,36 +30,57 @@ namespace BadFaith;
  * BadFaith container for Accept-* parsing
  *
  * @package BadFaith
- * @author William Milton
+ * @author William Milton <wa.milton@gmail.com>
  */
-class AcceptLikeList {
+class AcceptLikeList
+{
 
     public $items;
 
-    function __construct($headerStr = NULL) {
+    /**
+     * Calls the appropriate initializer.
+     * @param string|null $headerStr
+     */
+    public function __construct($headerStr = null)
+    {
         if ($headerStr) {
             $this->initWithStr($headerStr);
         }
     }
 
-    function initWithStr($headerStr) {
+    /**
+     * Helper for initializing with a string.
+     * @param string $headerStr
+     */
+    public function initWithStr($headerStr)
+    {
         $this->items = self::prefParse($headerStr);
     }
 
-    static function prefParse($headerStr) {
+    /**
+     * Given an Accept* request-header string, returns an array of AcceptLike
+     * objects.
+     * @param string $headerStr
+     * @return array
+     */
+    public static function prefParse($headerStr)
+    {
         $parts = self::prefSplit($headerStr);
-        $f = function ($str) {return new AcceptLike($str);};
+        $f = function ($str) {
+            return new AcceptLike($str);
+        };
         return array_map($f, $parts);
     }
 
     /**
      * Given an Accept* request-header field string, returns an array of
      * preference with parameters strings.
-     * @param string $prefWithParams
+     * @param string $prefWithParams ',' delimited list of prefs with params
      * @return array
      */
-    public static function prefSplit($prefWithParams) {
-        $parts = array_filter(explode (',', $prefWithParams));
+    public static function prefSplit($prefWithParams)
+    {
+        $parts = array_filter(explode(',', $prefWithParams));
         $parts = array_map('trim', $parts);
         reset($parts);
         return $parts;

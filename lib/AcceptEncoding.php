@@ -29,21 +29,31 @@ namespace BadFaith;
  * BadFaith container for Accept-* parsing
  *
  * @package BadFaith
- * @author William Milton
+ * @author William Milton <wa.milton@gmail.com>
  */
-class AcceptEncoding extends AcceptLike {
+class AcceptEncoding extends AcceptLike
+{
 
     public $pref;
     public $params;
     public $q;
     public $encoding;
 
-    function __construct($headerStr = NULL) {
+    /**
+     * @param string|null $headerStr the raw test of the header string or null
+     */
+    function __construct($headerStr = NULL)
+    {
         parent::__construct($headerStr);
         $this->init();
     }
 
-    static function __set_state(array $properties) {
+    /**
+     * @param array $properties the array this method always gets
+     * @return Accept the object version of that array
+     */
+    static function __set_state(array $properties)
+    {
         parent::__set_state($properties);
         $accept = new AcceptEncoding();
         foreach ($properties as $key=>$prop) {
@@ -56,7 +66,11 @@ class AcceptEncoding extends AcceptLike {
         return $accept;
     }
 
-    function init() {
+    /**
+     * Initializes attributes unique to this subclass.
+     */
+    function init()
+    {
         $this->encoding = $this->pref;
     }
 }

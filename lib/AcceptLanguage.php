@@ -29,9 +29,10 @@ namespace BadFaith;
  * BadFaith container for Accept-* parsing
  *
  * @package BadFaith
- * @author William Milton
+ * @author William Milton <wa.milton@gmail.com>
  */
-class AcceptLanguage extends AcceptLike {
+class AcceptLanguage extends AcceptLike
+{
 
     public $pref;
     public $params;
@@ -39,15 +40,24 @@ class AcceptLanguage extends AcceptLike {
     public $type;
     public $subtype;
 
-    function __construct($headerStr = NULL) {
+    /**
+     * @param string|null $headerStr the raw test of the header string or null
+     */
+    function __construct($headerStr = NULL)
+    {
         parent::__construct($headerStr);
         $this->init();
     }
 
-    static function __set_state(array $properties) {
+    /**
+     * @param array $properties the array this method always gets
+     * @return Accept the object version of that array
+     */
+    static function __set_state(array $properties)
+    {
         parent::__set_state($properties);
         $accept = new AcceptLanguage();
-        foreach ($properties as $key=>$prop) {
+        foreach ($properties as $key => $prop) {
             if (!property_exists('AcceptLike', $key)) {
                 if (property_exists($accept, $key)) {
                     $accept->$key = $prop;
@@ -57,10 +67,14 @@ class AcceptLanguage extends AcceptLike {
         return $accept;
     }
 
-    function init() {
+    /**
+     * Initializes attributes unique to this subclass.
+     */
+    function init()
+    {
         $parts = explode('-', $this->pref, 2);
         if (!array_key_exists(1, $parts)) {
-            $parts[1] = NULL;
+            $parts[1] = null;
         }
         $this->lang = $parts[0];
         $this->sublang = $parts[1];

@@ -34,10 +34,17 @@
 namespace BadFaith\Tests;
 
 use AcceptCharset;
+use \BadFaith as BF;
 
-class AcceptTestCharset extends \PHPUnit_Framework_TestCase
+/**
+ * TestCase for AcceptCharset
+ */
+class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * The PHPUnit setUp function
+     */
     public function setUp() {
         $this->headers = array (
             'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -52,15 +59,19 @@ class AcceptTestCharset extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testInitWithString() {
-        $accept_charset = new \BadFaith\AcceptCharset($this->accept_charset_split[0]);
-        $expected = new \BadFaith\AcceptCharset();
+    /**
+     * Tests the initialization of AcceptCharset.
+     */
+    public function testInitWithString()
+    {
+        $accept_charset = new BF\AcceptCharset($this->accept_charset_split[0]);
+        $expected = new BF\AcceptCharset();
         $expected->pref = 'ISO-8859-1';
         $expected->charset = 'ISO-8859-1';
         $expected->params = array();
         $expected->q = 1.0;
         $this->assertEquals($expected, $accept_charset);
-        $accept_charset = new \BadFaith\AcceptCharset($this->accept_charset_split[1]);
+        $accept_charset = new BF\AcceptCharset($this->accept_charset_split[1]);
         $expected->pref = 'utf-8';
         $expected->charset = 'utf-8';
         $expected->params = array();
