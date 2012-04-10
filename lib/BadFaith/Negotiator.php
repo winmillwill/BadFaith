@@ -64,9 +64,9 @@ class Negotiator {
    * Sets properties using the constructor arg.
    */
   function headers_from_arg($arg) {
-    foreach ($arg as $key=>$val) {
+    foreach ($arg as $key => $value) {
       if (property_exists('Negotiator', $key)) {
-        $this->$key = $_SERVER['HTTP_' . strtoupper($key)];
+        $this->$key = $arg[$key];
       }
     }
   }
