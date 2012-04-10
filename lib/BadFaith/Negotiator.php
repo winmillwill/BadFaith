@@ -66,7 +66,7 @@ class Negotiator {
   function headers_from_arg($arg) {
     foreach ($arg as $key => $value) {
       if (property_exists('Negotiator', $key)) {
-        $this->$key = $arg[$key];
+        $this->$key = $value;
       }
     }
   }
