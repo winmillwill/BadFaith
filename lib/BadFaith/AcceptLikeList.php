@@ -36,15 +36,18 @@ class AcceptLikeList
 {
 
     public $items;
+    const ELEMENT_CLASS = 'AcceptLike';
 
     /**
      * Calls the appropriate initializer.
      * @param string|null $headerStr
      */
-    public function __construct($headerStr = null)
+    public function __construct($headerIsh = null)
     {
-        if ($headerStr) {
-            $this->initWithStr($headerStr);
+        if (is_string($headerIsh)) {
+            $this->initWithStr($headerIsh);
+        } elseif (is_array($headerIsh)) {
+            //TODO: Implement Dict Parse
         }
     }
 
@@ -66,10 +69,24 @@ class AcceptLikeList
     public static function prefParse($headerStr)
     {
         $parts = self::prefSplit($headerStr);
-        $f = function ($str) {
-            return new AcceptLike($str);
+        $class = self::elementClass();
+        $f = function ($str) use ($class) {
+            return new $class($str);
         };
         return array_map($f, $parts);
+    }
+
+    /**
+     * Provides the class name of the constituent list elements in overridable
+     * static context..
+     * @param string $headerStr
+     * @return array
+     */
+    protected static function elementClass()
+    {
+        $factory = get_called_class();
+        $class = $factory::ELEMENT_CLASS;
+        return __NAMESPACE__ . '\\' . $class;
     }
 
     /**

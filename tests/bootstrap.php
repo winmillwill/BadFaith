@@ -11,8 +11,12 @@
 
 require_once __DIR__.'/../lib/BadFaith/Negotiator.php';
 require_once __DIR__.'/../lib/BadFaith/AcceptLike.php';
-require_once __DIR__.'/../lib/BadFaith/Accept.php';
-require_once __DIR__.'/../lib/BadFaith/AcceptLanguage.php';
-require_once __DIR__.'/../lib/BadFaith/AcceptEncoding.php';
-require_once __DIR__.'/../lib/BadFaith/AcceptCharset.php';
 require_once __DIR__.'/../lib/BadFaith/AcceptLikeList.php';
+require_once __DIR__.'/../lib/BadFaith/Accept.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptCharset.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptEncoding.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptLanguage.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptList.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptCharsetList.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptEncodingList.php';
+require_once __DIR__.'/../lib/BadFaith/AcceptLanguageList.php';

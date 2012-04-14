@@ -21,5 +21,8 @@
         <testsuite name="AcceptLikeList Test Suite">
           <directory>./tests/BadFaith</directory>
         </testsuite>
+        <testsuite name="AcceptList Test Suite">
+          <directory>./tests/BadFaith</directory>
+        </testsuite>
     </testsuites>
 </phpunit>
