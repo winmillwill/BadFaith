@@ -24,85 +24,93 @@
  * THE SOFTWARE.
  */
 
+namespace BadFaith;
+
 /**
  * BadFaith content negotiation class.
  *
  * @package BadFaith
  * @author William Milton
  */
-class Negotiator {
-  public $accept;
-  public $accept_charset;
-  public $accept_encoding;
-  public $accept_language;
+class Negotiator
+{
+    public $headerLiterals = array();
 
-  function __construct($headers = array()) {
-    if (empty($headers)) {
-      $this->headers_from_globals();
+    public $headerLists = array();
+
+    /**
+     * Constructor that initializes with given dict or $_SERVER.
+     * @param array $headers a dict of header strings
+     */
+    function __construct($headers = array())
+    {
+        if (empty($headers)) {
+            $this->headersFromGlobals();
+        } else {
+            $this->headersFromArg($headers);
+        }
+        $this->initLists();
     }
-    else {
-      $this->headers_from_arg($headers);
+
+    /**
+     * Sets properties using the $_SERVER array
+     */
+    function headersFromGlobals()
+    {
+        $keys = array(
+            'accept',
+            'accept_charset',
+            'accept_encoding',
+            'accept_language',
+        );
+        foreach ($keys as $key) {
+            $this->headerLiterals[$key] = $_SERVER['HTTP_' . strtoupper($key)];
+        }
     }
-  }
 
-  /**
-   * Sets properties using the $_SERVER array
-   */
-  function headers_from_globals() {
-    $keys = array(
-      'accept',
-      'accept_charset',
-      'accept_encoding',
-      'accept_language',
-    );
-    foreach ($keys as $key) {
-      $this->$key = $_SERVER['HTTP_' . strtoupper($key)];
+    /**
+     * Sets properties using the constructor arg.
+     */
+    function headersFromArg(array $arg)
+    {
+        foreach ($arg as $key => $value) {
+            $this->headerLiterals[$key] = $value;
+        }
     }
-  }
 
-  /**
-   * Sets properties using the constructor arg.
-   */
-  function headers_from_arg($arg) {
-    foreach ($arg as $key => $value) {
-      if (property_exists('Negotiator', $key)) {
-        $this->$key = $value;
-      }
+    /**
+     * Initializes the list objects for the different Accept* headers.
+     */
+    function initLists()
+    {
+        foreach ($this->headerLiterals as $key => $value) {
+            $class = $this->listClass($key);
+            $this->headerLists[$key] = new $class($value);
+        }
     }
-  }
 
-  /**
-   * Splits the Accept header media ranges
-   */
-  function accept_range_split($header) {
-    $media_ranges = explode(',', $header);
-    return $media_ranges;
-  }
-
-  /**
-   * Splits the Accept header media range types
-   */
-  function accept_range_type_split() {
-    $type_subtype = explode('/', $this->accept);
-    return $media_ranges;
-  }
-
-  /**
-   * Splits the Accept header media range parameters
-   */
-  function accept_range_parameter_split($range) {
-    $parameters = explode(';', $this->accept);
-    $type = array_pop($parameters);
-    return array('type' => $type, 'parameters' => $parameters);
-  }
-
-  /**
-   * Parses the Accept header media ranges
-   */
-  function accept_range_parse() {
-    $media_ranges = $this->accept_range_split($this->accept);
-    $type_with_params = $this->accept_range_parameter_split($range);
-    $parsed_ranges = array();
-    return $parsed_ranges;
-  }
+    /**
+     * Maps the type of header field to the list class that will hold its
+     * entries.
+     * @param $type string the key of the literals array
+     * @return the namespaced classname
+     */
+    function listClass($type)
+    {
+        switch (strtoupper($type)) {
+        case 'ACCEPT':
+            $class = 'AcceptList';
+            break;
+        case 'ACCEPT_CHARSET':
+            $class = 'AcceptCharsetList';
+            break;
+        case 'ACCEPT_ENCODING':
+            $class = 'AcceptEncodingList';
+            break;
+        case 'ACCEPT_LANGUAGE':
+            $class = 'AcceptLanguageList';
+            break;
+        }
+        return __NAMESPACE__ . '\\' . $class;
+    }
 }
