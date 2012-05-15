@@ -26,7 +26,7 @@
 
 namespace BadFaith\Tests;
 
-use Negotiator;
+use BadFaith\Negotiator;
 
 /**
  * Negotiator Test
@@ -64,7 +64,7 @@ class NegotiatorTest extends \PHPUnit_Framework_TestCase
     public function testInitAcceptsWithNothing()
     {
         $_SERVER = $this->server;
-        $negotiator = new \BadFaith\Negotiator();
+        $negotiator = new Negotiator();
 
         $this->assertEquals(
             $_SERVER['HTTP_ACCEPT'],
@@ -75,11 +75,21 @@ class NegotiatorTest extends \PHPUnit_Framework_TestCase
     public function testInitAcceptsWithArg()
     {
         $headers = $this->headers;
-        $negotiator = new \BadFaith\Negotiator($headers);
+        $negotiator = new Negotiator($headers);
 
         $this->assertEquals(
             $headers['accept'],
             $negotiator->headerLiterals['accept']
         );
+    }
+
+    public function testFaultTolerence()
+    {
+        $missing = $this->server;
+        unset($missing['HTTP_ACCEPT_CHARSET']);
+
+        $negotiator = new Negotiator($missing);
+
+        $this->assertGreaterThan(count($missing), count($negotiator->headerLists));
     }
 }

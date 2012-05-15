@@ -38,6 +38,13 @@ class Negotiator
 
     public $headerLists = array();
 
+    static protected $keys = array(
+        'accept',
+        'accept_charset',
+        'accept_encoding',
+        'accept_language',
+    );
+
     /**
      * Constructor that initializes with given dict or $_SERVER.
      * @param array $headers a dict of header strings
@@ -49,7 +56,6 @@ class Negotiator
         } else {
             $this->headersFromArg($headers);
         }
-        $this->initLists();
     }
 
     /**
@@ -57,15 +63,13 @@ class Negotiator
      */
     function headersFromGlobals()
     {
-        $keys = array(
-            'accept',
-            'accept_charset',
-            'accept_encoding',
-            'accept_language',
-        );
-        foreach ($keys as $key) {
-            $this->headerLiterals[$key] = $_SERVER['HTTP_' . strtoupper($key)];
+        $headers = array();
+
+        foreach (static::$keys as $key) {
+            $headers[$key] = $_SERVER['HTTP_' . strtoupper($key)];
         }
+
+        $this->headersFromArg($headers);
     }
 
     /**
@@ -73,17 +77,11 @@ class Negotiator
      */
     function headersFromArg(array $arg)
     {
-        foreach ($arg as $key => $value) {
-            $this->headerLiterals[$key] = $value;
-        }
-    }
+        foreach (static::$keys as $key) {
+            $value = array_key_exists($key, $arg) ? $arg[$key] : '';
 
-    /**
-     * Initializes the list objects for the different Accept* headers.
-     */
-    function initLists()
-    {
-        foreach ($this->headerLiterals as $key => $value) {
+            $this->headerLiterals[$key] = $value;
+
             $class = $this->listClass($key);
             $this->headerLists[$key] = new $class($value);
         }
@@ -111,6 +109,7 @@ class Negotiator
             $class = 'AcceptLanguageList';
             break;
         }
+
         return __NAMESPACE__ . '\\' . $class;
     }
 }
