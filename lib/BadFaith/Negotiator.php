@@ -112,4 +112,28 @@ class Negotiator
 
         return __NAMESPACE__ . '\\' . $class;
     }
+
+    /**
+     * @param string|null
+     * @return string|array
+     */
+    function getPreferred($type = null)
+    {
+    }
+
+    /**
+     * @param string
+     * @param string|array
+     */
+    function setPriority($type, $value)
+    {
+    }
+
+    /**
+     * @param string
+     * @return string
+     */
+    function getBestVariant($type)
+    {
+    }
 }
