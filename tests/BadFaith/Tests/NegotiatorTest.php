@@ -26,7 +26,8 @@
 
 namespace BadFaith\Tests;
 
-use Negotiator;
+use BadFaith\Negotiator;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Negotiator Test
@@ -81,5 +82,14 @@ class NegotiatorTest extends \PHPUnit_Framework_TestCase
             $headers['accept'],
             $negotiator->headerLiterals['accept']
         );
+    }
+
+    public function testCreateFromSymfonyRequest()
+    {
+        if (!class_exists('\\Symfony\\Component\\HttpFoundation\\Request')) {
+            return $this->markTestSkipped('Symfony HttpFoundation not loaded');
+        }
+
+        $this->assertInstanceOf('\\BadFaith\\Negotiator', Negotiator::createFromRequest(Request::createFromGlobals()));
     }
 }
