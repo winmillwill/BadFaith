@@ -109,6 +109,7 @@ class Negotiator
             $class = 'AcceptLanguageList';
             break;
         }
+
         return __NAMESPACE__ . '\\' . $class;
     }
 }
