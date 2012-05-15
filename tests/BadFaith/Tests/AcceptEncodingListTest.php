@@ -34,6 +34,7 @@
 namespace BadFaith\Tests;
 
 use AcceptCharsetList;
+use BadFaith\ItemContainer;
 
 class AcceptCharsetListTest extends \PHPUnit_Framework_TestCase
 {
@@ -53,7 +54,10 @@ class AcceptCharsetListTest extends \PHPUnit_Framework_TestCase
             'utf-8;q=0.7',
             '*;q=0.3',
         );
-        $this->charsetParsed = array(
+
+        $this->charsetParsed = new ItemContainer;
+
+        $this->charsetParsed->insert(
             \BadFaith\AcceptCharset::__set_state(
                 array(
                     'pref' => 'ISO-8859-1',
@@ -61,7 +65,10 @@ class AcceptCharsetListTest extends \PHPUnit_Framework_TestCase
                     'q' => '1.0',
                     'params' => array(),
                 )
-            ),
+            )
+        );
+
+        $this->charsetParsed->insert(
             \BadFaith\AcceptCharset::__set_state(
                 array(
                     'pref' => 'utf-8',
@@ -69,7 +76,10 @@ class AcceptCharsetListTest extends \PHPUnit_Framework_TestCase
                     'q' => '0.7',
                     'params' => array(),
                 )
-            ),
+            )
+        );
+
+        $this->charsetParsed->insert(
             \BadFaith\AcceptCharset::__set_state(
                 array(
                     'pref' => '*',
@@ -77,7 +87,7 @@ class AcceptCharsetListTest extends \PHPUnit_Framework_TestCase
                     'q' => '0.3',
                     'params' => array(),
                 )
-            ),
+            )
         );
     }
 

@@ -34,8 +34,11 @@ namespace BadFaith;
  */
 class AcceptLikeList
 {
-
+    /**
+     * @var ItemContainer
+     */
     public $items;
+
     const ELEMENT_CLASS = 'AcceptLike';
 
     /**
@@ -52,6 +55,14 @@ class AcceptLikeList
     }
 
     /**
+     * @return AcceptItemInterface
+     */
+    public function getPreferred()
+    {
+        return $this->items->top();
+    }
+
+    /**
      * Helper for initializing with a string.
      * @param string $headerStr
      */
@@ -64,16 +75,20 @@ class AcceptLikeList
      * Given an Accept* request-header string, returns an array of AcceptLike
      * objects.
      * @param string $headerStr
-     * @return array
+     * @return ItemContainer
      */
     public static function prefParse($headerStr)
     {
+        $items = new ItemContainer;
+
         $parts = self::prefSplit($headerStr);
         $class = self::elementClass();
-        $f = function ($str) use ($class) {
-            return new $class($str);
-        };
-        return array_map($f, $parts);
+
+        foreach ($parts as $entity) {
+            $items->insert(new $class($entity));
+        }
+
+        return $items;
     }
 
     /**
@@ -84,8 +99,8 @@ class AcceptLikeList
      */
     protected static function elementClass()
     {
-        $factory = get_called_class();
-        $class = $factory::ELEMENT_CLASS;
+        $class = static::ELEMENT_CLASS;
+
         return __NAMESPACE__ . '\\' . $class;
     }
 
@@ -100,6 +115,7 @@ class AcceptLikeList
         $parts = array_filter(explode(',', $prefWithParams));
         $parts = array_map('trim', $parts);
         reset($parts);
+
         return $parts;
     }
 }

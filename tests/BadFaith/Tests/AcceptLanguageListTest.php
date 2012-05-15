@@ -34,6 +34,7 @@
 namespace BadFaith\Tests;
 
 use AcceptLanguageList;
+use BadFaith\ItemContainer;
 
 class AcceptLanguageListTest extends \PHPUnit_Framework_TestCase
 {
@@ -52,7 +53,10 @@ class AcceptLanguageListTest extends \PHPUnit_Framework_TestCase
             'en-US',
             'en;q=0.8',
         );
-        $this->languageParsed = array(
+
+        $this->languageParsed = new ItemContainer;
+
+        $this->languageParsed->insert(
             \BadFaith\AcceptLanguage::__set_state(
                 array(
                     'pref' => 'en-US',
@@ -61,7 +65,10 @@ class AcceptLanguageListTest extends \PHPUnit_Framework_TestCase
                     'q' => '1.0',
                     'params' => array(),
                 )
-            ),
+            )
+        );
+
+        $this->languageParsed->insert(
             \BadFaith\AcceptLanguage::__set_state(
                 array(
                     'pref' => 'en',
@@ -69,7 +76,7 @@ class AcceptLanguageListTest extends \PHPUnit_Framework_TestCase
                     'q' => '0.8',
                     'params' => array(),
                 )
-            ),
+            )
         );
     }
 

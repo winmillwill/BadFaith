@@ -34,6 +34,7 @@
 namespace BadFaith\Tests;
 
 use AcceptLikeList;
+use BadFaith\ItemContainer;
 
 class AcceptLikeListTest extends \PHPUnit_Framework_TestCase
 {
@@ -54,42 +55,57 @@ class AcceptLikeListTest extends \PHPUnit_Framework_TestCase
             'application/xml;q=0.9',
             '*/*;q=0.8'
         );
-        $this->acceptParsed = array(
+
+        $this->acceptParsed = new ItemContainer;
+
+        $this->acceptParsed->insert(
             \BadFaith\AcceptLike::__set_state(
                 array(
                     'pref' => 'text/html',
                     'params' => array('level' => '2'),
                     'q' => '0.7',
                 )
-            ),
+            )
+        );
+
+        $this->acceptParsed->insert(
             \BadFaith\AcceptLike::__set_state(
                 array(
                     'pref' => 'text/html',
                     'params' => array(),
                     'q' => 1.0,
                 )
-            ),
+            )
+        );
+
+        $this->acceptParsed->insert(
             \BadFaith\AcceptLike::__set_state(
                 array(
                     'pref' => 'application/xhtml+xml',
                     'params' => array(),
                     'q' => 1.0,
                 )
-            ),
+            )
+        );
+
+        $this->acceptParsed->insert(
             \BadFaith\AcceptLike::__set_state(
                 array(
                     'pref' => 'application/xml',
                     'params' => array(),
                     'q' => 0.9,
                 )
-            ),
+            )
+        );
+
+        $this->acceptParsed->insert(
             \BadFaith\AcceptLike::__set_state(
                 array(
                     'pref' => '*/*',
                     'params' => array(),
                     'q' => 0.8,
                 )
-            ),
+            )
         );
     }
 

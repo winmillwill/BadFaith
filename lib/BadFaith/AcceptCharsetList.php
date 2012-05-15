@@ -35,13 +35,4 @@ namespace BadFaith;
 class AcceptCharsetList extends AcceptLikeList
 {
     const ELEMENT_CLASS = 'AcceptCharset';
-
-    /**
-     * Calls the appropriate initializer.
-     * @param string|null $headerStr
-     */
-    public function __construct($headerIsh = null)
-    {
-        parent::__construct($headerIsh);
-    }
 }
