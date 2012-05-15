@@ -50,14 +50,17 @@ class Negotiator
     /**
      * Constructor that initializes with given dict or $_SERVER.
      * @param array $headers a dict of header strings
+     * @param array $variants What the service can provide
      */
-    function __construct($headers = array())
+    function __construct($headers = array(), $variants = array())
     {
         if (empty($headers)) {
             $this->headersFromGlobals();
         } else {
             $this->headersFromArg($headers);
         }
+
+        $this->variantsFromArg($variants);
     }
 
     /**
@@ -86,6 +89,14 @@ class Negotiator
 
             $class = $this->listClass($key);
             $this->headerLists[$key] = new $class($value);
+        }
+    }
+
+    function variantsFromArg(array $arg)
+    {
+        foreach ($arg as $key => $val) {
+            $class = $this->listClass($key);
+            $this->variants[$key] = new $class($val);
         }
     }
 
@@ -131,5 +142,28 @@ class Negotiator
         }
 
         return $return;
+    }
+
+    /**
+     * @param string
+     */
+    function getBestVariant($type)
+    {
+        $lookup = "accept_{$type}";
+
+        if (!isset($this->headerLists[$lookup])) {
+            throw new \UnexpectedValueException("{$type} not found");
+        }
+
+        foreach ($this->headerLists[$lookup]->items as $item) {
+            foreach ($this->variants[$lookup]->items as $varItem) {
+                if ($item->getPref() == $varItem->getPref()) {
+                    return $item->getPref();
+                }
+            }
+        }
+
+        // If the client and server can't negotiate, return the services preference
+        return $this->variants["accept_{$type}"]->getPreferred()->getPref();
     }
 }

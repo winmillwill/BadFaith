@@ -45,7 +45,7 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
     {
         $this->headers = array (
             'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'acceptEncoding' => 'gzip,deflate;q=0.5,sdch;q=0.8',
+            'acceptEncoding' => 'gzip,deflate;q=1,sdch;q=1',
             'acceptLanguage' => 'en-US,en;q=0.8',
             'acceptCharset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
         );
