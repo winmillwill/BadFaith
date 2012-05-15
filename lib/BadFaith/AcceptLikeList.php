@@ -84,8 +84,8 @@ class AcceptLikeList
      */
     protected static function elementClass()
     {
-        $factory = get_called_class();
-        $class = $factory::ELEMENT_CLASS;
+        $class = static::ELEMENT_CLASS;
+
         return __NAMESPACE__ . '\\' . $class;
     }
 

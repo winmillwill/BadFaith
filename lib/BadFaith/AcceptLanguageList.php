@@ -35,12 +35,4 @@ namespace BadFaith;
 class AcceptLanguageList extends AcceptLikeList
 {
     const ELEMENT_CLASS = 'AcceptLanguage';
-    /**
-     * Calls the appropriate initializer.
-     * @param string|null $headerStr
-     */
-    public function __construct($headerIsh = null)
-    {
-        parent::__construct($headerIsh);
-    }
 }
