@@ -53,12 +53,13 @@ class AcceptLike
      */
     static function __set_state(array $properties)
     {
-        $acceptLike = new AcceptLike();
+        $acceptLike = new static();
         foreach ($properties as $key=>$prop) {
             if (property_exists($acceptLike, $key)) {
                 $acceptLike->$key = $prop;
             }
         }
+
         return $acceptLike;
     }
 
