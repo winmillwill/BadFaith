@@ -38,6 +38,8 @@ class Negotiator
 
     public $headerLists = array();
 
+    public $variants = array();
+
     static protected $keys = array(
         'accept',
         'accept_charset',
@@ -119,21 +121,15 @@ class Negotiator
      */
     function getPreferred($type = null)
     {
-    }
+        if (null === $type) {
+            $return = array();
+            foreach ($this->headerLists as $name => $list) {
+                $return[$name] = $list->getPreferred()->getPref();
+            }
+        } else {
+            $return = $this->headerLists["accept_{$type}"]->getPreferred()->getPref();
+        }
 
-    /**
-     * @param string
-     * @param string|array
-     */
-    function setPriority($type, $value)
-    {
-    }
-
-    /**
-     * @param string
-     * @return string
-     */
-    function getBestVariant($type)
-    {
+        return $return;
     }
 }

@@ -31,7 +31,7 @@ namespace BadFaith;
  * @package BadFaith
  * @author William Milton
  */
-class AcceptLike
+class AcceptLike implements AcceptItemInterface
 {
 
     public $pref;
@@ -46,6 +46,22 @@ class AcceptLike
         if ($headerStr) {
             $this->initWithStr($headerStr);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPref()
+    {
+        return $this->pref;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuality()
+    {
+        return $this->q;
     }
 
     /**
