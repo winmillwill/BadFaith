@@ -26,6 +26,8 @@
 
 namespace BadFaith;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * BadFaith content negotiation class.
  *
@@ -66,6 +68,11 @@ class Negotiator
         foreach ($keys as $key) {
             $this->headerLiterals[$key] = $_SERVER['HTTP_' . strtoupper($key)];
         }
+    }
+
+    static function createFromRequest(Request $request)
+    {
+        return new static($request->server->all());
     }
 
     /**
