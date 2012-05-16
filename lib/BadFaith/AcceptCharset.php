@@ -49,24 +49,6 @@ class AcceptCharset extends AcceptLike
     }
 
     /**
-     * @param array $properties the array this method always gets
-     * @return Accept the object version of that array
-     */
-    static function __set_state(array $properties)
-    {
-        parent::__set_state($properties);
-        $accept = new AcceptCharset();
-        foreach ($properties as $key=>$prop) {
-            if (!property_exists('AcceptLike', $key)) {
-                if (property_exists($accept, $key)) {
-                    $accept->$key = $prop;
-                }
-            }
-        }
-        return $accept;
-    }
-
-    /**
      * Initializes attributes unique to this subclass.
      */
     function init()

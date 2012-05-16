@@ -31,7 +31,7 @@ namespace BadFaith;
  * @package BadFaith
  * @author William Milton
  */
-class AcceptLike
+class AcceptLike implements AcceptItemInterface
 {
 
     public $pref;
@@ -49,16 +49,33 @@ class AcceptLike
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getPref()
+    {
+        return $this->pref;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuality()
+    {
+        return $this->q;
+    }
+
+    /**
      * @param array $properties the array this method always gets
      */
     static function __set_state(array $properties)
     {
-        $acceptLike = new AcceptLike();
+        $acceptLike = new static();
         foreach ($properties as $key=>$prop) {
             if (property_exists($acceptLike, $key)) {
                 $acceptLike->$key = $prop;
             }
         }
+
         return $acceptLike;
     }
 

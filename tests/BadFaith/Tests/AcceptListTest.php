@@ -34,6 +34,7 @@
 namespace BadFaith\Tests;
 
 use AcceptList;
+use BadFaith\ItemContainer;
 
 class AcceptListTest extends \PHPUnit_Framework_TestCase
 {
@@ -55,7 +56,10 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
             'application/xml;q=0.9',
             '*/*;q=0.8'
         );
-        $this->acceptParsed = array(
+
+        $this->acceptParsed = new ItemContainer;
+
+        $this->acceptParsed->insert(
             \BadFaith\Accept::__set_state(
                 array(
                     'pref' => 'text/html',
@@ -64,7 +68,10 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
                     'type' => 'text',
                     'subtype' => 'html',
                 )
-            ),
+            )
+        );
+
+        $this->acceptParsed->insert(
             \BadFaith\Accept::__set_state(
                 array(
                     'pref' => 'text/html',
@@ -73,7 +80,10 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
                     'type' => 'text',
                     'subtype' => 'html',
                 )
-            ),
+            )
+        );
+
+        $this->acceptParsed->insert(
             \BadFaith\Accept::__set_state(
                 array(
                     'pref' => 'application/xhtml+xml',
@@ -82,7 +92,10 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
                     'type' => 'application',
                     'subtype' => 'xhtml+xml',
                 )
-            ),
+            )
+        );
+
+        $this->acceptParsed->insert(
             \BadFaith\Accept::__set_state(
                 array(
                     'pref' => 'application/xml',
@@ -91,7 +104,10 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
                     'type' => 'application',
                     'subtype' => 'xml',
                 )
-            ),
+            )
+        );
+
+        $this->acceptParsed->insert(
             \BadFaith\Accept::__set_state(
                 array(
                     'pref' => '*/*',
@@ -100,7 +116,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
                     'type' => '*',
                     'subtype' => '*',
                 )
-            ),
+            )
         );
     }
 

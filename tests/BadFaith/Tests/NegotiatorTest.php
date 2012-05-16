@@ -26,7 +26,7 @@
 
 namespace BadFaith\Tests;
 
-use Negotiator;
+use BadFaith\Negotiator;
 
 /**
  * Negotiator Test
@@ -37,6 +37,10 @@ use Negotiator;
 class NegotiatorTest extends \PHPUnit_Framework_TestCase
 {
     protected $server;
+
+    protected $headers;
+
+    protected $media_ranges;
 
     public function setUp()
     {
@@ -64,7 +68,7 @@ class NegotiatorTest extends \PHPUnit_Framework_TestCase
     public function testInitAcceptsWithNothing()
     {
         $_SERVER = $this->server;
-        $negotiator = new \BadFaith\Negotiator();
+        $negotiator = new Negotiator();
 
         $this->assertEquals(
             $_SERVER['HTTP_ACCEPT'],
@@ -75,11 +79,55 @@ class NegotiatorTest extends \PHPUnit_Framework_TestCase
     public function testInitAcceptsWithArg()
     {
         $headers = $this->headers;
-        $negotiator = new \BadFaith\Negotiator($headers);
+        $negotiator = new Negotiator($headers);
 
         $this->assertEquals(
             $headers['accept'],
             $negotiator->headerLiterals['accept']
         );
+    }
+
+    public function testFaultTolerence()
+    {
+        $missing = $this->server;
+        unset($missing['HTTP_ACCEPT_CHARSET']);
+
+        $negotiator = new Negotiator($missing);
+
+        $this->assertGreaterThan(count($missing), count($negotiator->headerLists));
+    }
+
+    public function testGetPreferredString()
+    {
+        $negotiator = new Negotiator($this->headers);
+
+        $this->assertEquals('gzip', $negotiator->getPreferred('encoding'));
+    }
+
+    public function testGetPreferredArray()
+    {
+        $negotiator = new Negotiator($this->headers);
+
+        $expected = array(
+            'accept' => 'text/html'
+          , 'accept_charset' => 'ISO-8859-1'
+          , 'accept_encoding' => 'gzip'
+          , 'accept_language' => 'en-US'
+        );
+
+        $this->assertEquals($expected, $negotiator->getPreferred());
+    }
+
+    public function testGetBestVariant()
+    {
+        $client = 'fr,en;q=0.8,en-us;q=0.5';
+        $server = 'en-us,ar,en';
+
+        $headers = $this->headers;
+        $headers['accept_language'] = $client;
+
+        $negotiator = new Negotiator($headers, array('accept_language' => $server));
+
+        $this->assertEquals('en', $negotiator->getBestVariant('language'));
     }
 }

@@ -35,12 +35,4 @@ namespace BadFaith;
 class AcceptEncodingList extends AcceptLikeList
 {
     const ELEMENT_CLASS = 'AcceptEncoding';
-    /**
-     * Calls the appropriate initializer.
-     * @param string|null $headerStr
-     */
-    public function __construct($headerIsh = null)
-    {
-        parent::__construct($headerIsh);
-    }
 }

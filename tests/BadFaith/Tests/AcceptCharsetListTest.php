@@ -33,7 +33,8 @@
 
 namespace BadFaith\Tests;
 
-use AcceptEncodingList;
+use BadFaith\AcceptEncodingList;
+use BadFaith\ItemContainer;
 
 class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,7 +45,7 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
     {
         $this->headers = array (
             'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'acceptEncoding' => 'gzip,deflate,sdch',
+            'acceptEncoding' => 'gzip,deflate;q=1,sdch;q=1',
             'acceptLanguage' => 'en-US,en;q=0.8',
             'acceptCharset' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
         );
@@ -53,7 +54,10 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
             'deflate',
             'sdch',
         );
-        $this->encodingParsed = array(
+
+        $this->encodingParsed = new ItemContainer;
+
+        $this->encodingParsed->insert(
             \BadFaith\AcceptEncoding::__set_state(
                 array(
                     'pref' => 'gzip',
@@ -61,7 +65,10 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
                     'q' => '1.0',
                     'params' => array(),
                 )
-            ),
+            )
+        );
+
+        $this->encodingParsed->insert(
             \BadFaith\AcceptEncoding::__set_state(
                 array(
                     'pref' => 'deflate',
@@ -69,7 +76,10 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
                     'q' => '1.0',
                     'params' => array(),
                 )
-            ),
+            )
+        );
+
+        $this->encodingParsed->insert(
             \BadFaith\AcceptEncoding::__set_state(
                 array(
                     'pref' => 'sdch',
@@ -77,7 +87,7 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
                     'q' => '1.0',
                     'params' => array(),
                 )
-            ),
+            )
         );
     }
 
