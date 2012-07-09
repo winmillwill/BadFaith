@@ -41,8 +41,8 @@ class Negotiator
     public $variants = array();
 
     static protected $keys = array(
-        'accept',
-        'accept_charset' => 'utf-8',
+        'accept'          => '',
+        'accept_charset'  => 'utf-8',
         'accept_encoding' => '',
         'accept_language' => 'en-US',
     );
