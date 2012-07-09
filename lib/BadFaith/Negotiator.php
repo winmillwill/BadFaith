@@ -42,9 +42,9 @@ class Negotiator
 
     static protected $keys = array(
         'accept',
-        'accept_charset',
-        'accept_encoding',
-        'accept_language',
+        'accept_charset' => 'utf-8',
+        'accept_encoding' => '',
+        'accept_language' => 'en-US',
     );
 
     /**
@@ -70,8 +70,8 @@ class Negotiator
     {
         $headers = array();
 
-        foreach (static::$keys as $key) {
-            $headers[$key] = $_SERVER['HTTP_' . strtoupper($key)];
+        foreach (static::$keys as $key => $default) {
+            $headers[$key] = (isset($_SERVER['HTTP_' . strtoupper($key)])) ? $_SERVER['HTTP_' . strtoupper($key)] : $default;
         }
 
         $this->headersFromArg($headers);
@@ -82,7 +82,7 @@ class Negotiator
      */
     function headersFromArg(array $arg)
     {
-        foreach (static::$keys as $key) {
+        foreach (static::$keys as $key => $default) {
             $value = array_key_exists($key, $arg) ? $arg[$key] : '';
 
             $this->headerLiterals[$key] = $value;
