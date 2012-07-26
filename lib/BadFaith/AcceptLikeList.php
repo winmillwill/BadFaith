@@ -51,6 +51,7 @@ class AcceptLikeList
             $this->initWithStr($headerIsh);
         } elseif (is_array($headerIsh)) {
             //TODO: Implement Dict Parse
+           $this->initWithArray($headerIshList);
         }
     }
 
@@ -71,6 +72,10 @@ class AcceptLikeList
         $this->items = self::prefParse($headerStr);
     }
 
+    public function initWithArray($headerIshList) {
+        $this->items = self::initList($headerIshList);
+    }
+
     /**
      * Given an Accept* request-header string, returns an array of AcceptLike
      * objects.
@@ -79,12 +84,15 @@ class AcceptLikeList
      */
     public static function prefParse($headerStr)
     {
-        $items = new ItemContainer;
-
         $parts = self::prefSplit($headerStr);
+        return self::initList($parts);
+    }
+
+    static function initList($acceptIshes) {
+        $items = new ItemContainer();
         $class = self::elementClass();
 
-        foreach ($parts as $entity) {
+        foreach ($acceptIshes as $entity) {
             $items->insert(new $class($entity));
         }
 
