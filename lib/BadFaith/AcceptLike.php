@@ -41,10 +41,14 @@ class AcceptLike implements AcceptItemInterface
     /**
      * @param string|null $headerStr the raw test of the header string or null
      */
-    function __construct($headerStr = NULL)
+    function __construct($headerIsh = NULL)
     {
-        if ($headerStr) {
-            $this->initWithStr($headerStr);
+        if (is_array($headerIsh))
+        {
+            $this->initWithDict($headerIsh);
+        }
+        else {
+            $this->initWithStr($headerIsh);
         }
     }
 
@@ -69,13 +73,7 @@ class AcceptLike implements AcceptItemInterface
      */
     static function __set_state(array $properties)
     {
-        $acceptLike = new static();
-        foreach ($properties as $key=>$prop) {
-            if (property_exists($acceptLike, $key)) {
-                $acceptLike->$key = $prop;
-            }
-        }
-
+        $acceptLike = new static($properties);
         return $acceptLike;
     }
 
@@ -91,6 +89,18 @@ class AcceptLike implements AcceptItemInterface
         $this->params = $tuple['params'];
         $this->q = $q;
         $this->pref = $tuple['pref'];
+    }
+
+    /**
+     * @param array $headerDict a dictionary representation of a header field.
+     */
+    function initWithDict(array $headerDict)
+    {
+        foreach ($headerDict as $key=>$prop) {
+            if (property_exists($this, $key)) {
+                $this->$key = $prop;
+            }
+        }
     }
 
     /**

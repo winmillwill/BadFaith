@@ -41,30 +41,12 @@ class Accept extends AcceptLike
     public $subtype;
 
     /**
-     * @param string|null $headerStr the raw test of the header string or null
+     * @param string|null $headerIsh the raw text of the header string or null
      */
-    function __construct($headerStr = null)
+    function __construct($headerIsh = null)
     {
-        parent::__construct($headerStr);
+        parent::__construct($headerIsh);
         $this->init();
-    }
-
-    /**
-     * @param array $properties the array this method always gets
-     * @return Accept the object version of that array
-     */
-    static function __set_state(array $properties)
-    {
-        parent::__set_state($properties);
-        $accept = new Accept();
-        foreach ($properties as $key=>$prop) {
-            if (!property_exists('AcceptLike', $key)) {
-                if (property_exists($accept, $key)) {
-                    $accept->$key = $prop;
-                }
-            }
-        }
-        return $accept;
     }
 
     /**

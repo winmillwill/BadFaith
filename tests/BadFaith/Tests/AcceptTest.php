@@ -75,5 +75,6 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         $expected->type = 'text';
         $expected->subtype = 'html';
         $this->assertEquals($expected, $accept);
+        var_dump($accept);
     }
 }

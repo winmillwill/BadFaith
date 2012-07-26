@@ -6,7 +6,8 @@ class ItemContainer implements \IteratorAggregate, \Countable
 {
     protected $items = array();
 
-    public function insert(AcceptItemInterface $item) {
+    public function insert(AcceptItemInterface $item)
+    {
         foreach ($this->items as $i => $check) {
             if (1 === $this->compare($item, $check)) {
                 array_splice($this->items, $i, 0, array($item));
