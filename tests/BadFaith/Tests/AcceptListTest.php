@@ -60,7 +60,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         $this->acceptParsed = new ItemContainer;
 
         $this->acceptParsed->insert(
-            \BadFaith\Accept::__set_state(
+            new \BadFaith\Accept(
                 array(
                     'pref' => 'text/html',
                     'params' => array('level' => '2'),
@@ -72,7 +72,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->acceptParsed->insert(
-            \BadFaith\Accept::__set_state(
+            new \BadFaith\Accept(
                 array(
                     'pref' => 'text/html',
                     'params' => array(),
@@ -84,7 +84,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->acceptParsed->insert(
-            \BadFaith\Accept::__set_state(
+            new \BadFaith\Accept(
                 array(
                     'pref' => 'application/xhtml+xml',
                     'params' => array(),
@@ -96,7 +96,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->acceptParsed->insert(
-            \BadFaith\Accept::__set_state(
+            new \BadFaith\Accept(
                 array(
                     'pref' => 'application/xml',
                     'params' => array(),
@@ -108,7 +108,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->acceptParsed->insert(
-            \BadFaith\Accept::__set_state(
+            new \BadFaith\Accept(
                 array(
                     'pref' => '*/*',
                     'params' => array(),
