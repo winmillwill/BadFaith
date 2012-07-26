@@ -118,16 +118,7 @@ class NegotiatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $negotiator->getPreferred());
     }
 
-    public function testGetBestVariant()
+    public function testModNegotiation()
     {
-        $client = 'fr,en;q=0.8,en-us;q=0.5';
-        $server = 'en-us,ar,en';
-
-        $headers = $this->headers;
-        $headers['accept_language'] = $client;
-
-        $negotiator = new Negotiator($headers, array('accept_language' => $server));
-
-        $this->assertEquals('en', $negotiator->getBestVariant('language'));
     }
 }
