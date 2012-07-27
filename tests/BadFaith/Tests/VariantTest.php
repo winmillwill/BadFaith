@@ -20,7 +20,6 @@ class VariantTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testInit() {
-        $var = new \BadFaith\Variant('foovar', $this->variantDict);
-        var_dump($var->getAccepts());
+        $var = new \BadFaith\Variant($this->variantDict);
     }
 }
