@@ -23,7 +23,7 @@ class Variant
     {
         foreach ($dictOfDicts as $dimension => $dict) {
             if ($dimension == 'mime') {
-                $class = '\\' . __NAMESPACE__ . '\\' . 'Accept';
+                $class = get_class(new Accept());
             }
             else {
                 $class = '\\' . __NAMESPACE__ . '\\' . (class_exists(ucwords($dimension)) ? ucwords($dimension) : 'AcceptLike');

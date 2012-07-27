@@ -95,8 +95,7 @@ class Negotiator
     function variantsFromArg(array $arg)
     {
         foreach ($arg as $key => $val) {
-            $class = '\\' . __NAMESPACE__ . '\\' . 'Variant';
-            $this->variants[$key] = new $class($val);
+            $this->variants[$key] = new Variant($val);
         }
     }
 

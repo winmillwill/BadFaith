@@ -9,25 +9,17 @@
  * file that was distributed with this source code.
  */
 
-    $loaderFile = dirname(__DIR__) . '/vendor/autoload.php';
-
-    if (file_exists($loaderFile)) {
-        $loader = require_once $loaderFile;
-
-        $loader->add('BadFaith\\Tests', __DIR__);
-        $loader->register();
-    } else {
-        require_once __DIR__.'/../lib/BadFaith/AcceptItemInterface.php';
-        require_once __DIR__.'/../lib/BadFaith/ItemContainer.php';
-        require_once __DIR__.'/../lib/BadFaith/Negotiator.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptLike.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptLikeList.php';
-        require_once __DIR__.'/../lib/BadFaith/Accept.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptCharset.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptEncoding.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptLanguage.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptList.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptCharsetList.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptEncodingList.php';
-        require_once __DIR__.'/../lib/BadFaith/AcceptLanguageList.php';
+spl_autoload_register(function ($class) {
+    if (0 === strpos(ltrim($class, '/'), 'BadFaith')) {
+        if (file_exists($file = __DIR__.'/../lib/BadFaith'.substr(str_replace('\\', '/', $class), strlen('BadFaith')).'.php')) {
+            require_once $file;
+        }
+        elseif (file_exists($file = __DIR__.'/../tests/BadFaith'.substr(str_replace('\\', '/', $class), strlen('BadFaith')).'.php')) {
+            require_once $file;
+        }
     }
+});
+
+if (file_exists($loader = __DIR__.'/../vendor/autoload.php')) {
+    require_once $loader;
+}
