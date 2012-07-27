@@ -50,7 +50,6 @@ class AcceptLikeList
         if (is_string($headerIsh)) {
             $this->initWithStr($headerIsh);
         } elseif (is_array($headerIsh)) {
-            //TODO: Implement Dict Parse
            $this->initWithArray($headerIshList);
         }
     }
@@ -72,7 +71,12 @@ class AcceptLikeList
         $this->items = self::prefParse($headerStr);
     }
 
-    public function initWithArray($headerIshList) {
+    /**
+     * Helper for initializing with an array.
+     * @param array $headerIshList
+     */
+    public function initWithArray($headerIshList)
+    {
         $this->items = self::initList($headerIshList);
     }
 
@@ -88,7 +92,11 @@ class AcceptLikeList
         return self::initList($parts);
     }
 
-    static function initList($acceptIshes) {
+    /**
+     * @return ItemContainer with proper element classes for members.
+     */
+    static function initList($acceptIshes)
+    {
         $items = new ItemContainer();
         $class = self::elementClass();
 
