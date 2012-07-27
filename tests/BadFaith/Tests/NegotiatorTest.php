@@ -96,29 +96,4 @@ class NegotiatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertGreaterThan(count($missing), count($negotiator->headerLists));
     }
-
-    public function testGetPreferredString()
-    {
-        $negotiator = new Negotiator($this->headers);
-
-        $this->assertEquals('gzip', $negotiator->getPreferred('encoding'));
-    }
-
-    public function testGetPreferredArray()
-    {
-        $negotiator = new Negotiator($this->headers);
-
-        $expected = array(
-            'accept' => 'text/html'
-          , 'accept_charset' => 'ISO-8859-1'
-          , 'accept_encoding' => 'gzip'
-          , 'accept_language' => 'en-US'
-        );
-
-        $this->assertEquals($expected, $negotiator->getPreferred());
-    }
-
-    public function testModNegotiation()
-    {
-    }
 }

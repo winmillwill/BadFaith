@@ -94,9 +94,7 @@ class Negotiator
 
     function variantsFromArg(array $arg)
     {
-        foreach ($arg as $key => $val) {
-            $this->variants[$key] = new Variant($val);
-        }
+        $this->variants = new VariantList($arg);
     }
 
     /**
@@ -125,44 +123,7 @@ class Negotiator
         return __NAMESPACE__ . '\\' . $class;
     }
 
-    /**
-     * @param string|null
-     * @return string|array
-     */
-    function getPreferred($type = null)
+    function apacheNegotiate()
     {
-        if (null === $type) {
-            $return = array();
-            foreach ($this->headerLists as $name => $list) {
-                $return[$name] = $list->getPreferred()->getPref();
-            }
-        } else {
-            $return = $this->headerLists["accept_{$type}"]->getPreferred()->getPref();
-        }
-
-        return $return;
-    }
-
-    /**
-     * @param string
-     */
-    function getBestVariant($type)
-    {
-        $lookup = "accept_{$type}";
-
-        if (!isset($this->headerLists[$lookup])) {
-            throw new \UnexpectedValueException("{$type} not found");
-        }
-
-        foreach ($this->headerLists[$lookup]->items as $item) {
-            foreach ($this->variants[$lookup]->items as $varItem) {
-                if ($item->getPref() == $varItem->getPref()) {
-                    return $item->getPref();
-                }
-            }
-        }
-
-        // If the client and server can't negotiate, return the services preference
-        return $this->variants["accept_{$type}"]->getPreferred()->getPref();
     }
 }

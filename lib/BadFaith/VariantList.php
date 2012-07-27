@@ -47,6 +47,15 @@ class VariantList implements \IteratorAggregate, \Countable
         return $this->prefHashes[$dimension];
     }
 
+    public function getPrefHashes()
+    {
+        $hashes = array();
+        foreach ($this->prefHashes as $dimension => $hash) {
+            $hashes[$dimension] = $this->getPrefHash($dimension);
+        }
+        return $hashes;
+    }
+
     /**
      * {@inheritdoc}
      */
