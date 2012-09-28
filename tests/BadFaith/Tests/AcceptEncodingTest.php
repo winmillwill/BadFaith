@@ -33,8 +33,7 @@
 
 namespace BadFaith\Tests;
 
-use AcceptEncoding;
-use \BadFaith\AcceptEncoding as AE;
+use BadFaith\AcceptEncoding as AE;
 
 /**
  * TestCase for AcceptEncoding

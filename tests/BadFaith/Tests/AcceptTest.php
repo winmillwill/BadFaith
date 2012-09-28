@@ -33,7 +33,7 @@
 
 namespace BadFaith\Tests;
 
-use Accept;
+use BadFaith\Accept;
 
 class AcceptTest extends \PHPUnit_Framework_TestCase
 {
@@ -67,8 +67,8 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testInitWithString() {
-        $accept = new \BadFaith\Accept($this->acceptSplit[0]);
-        $expected = new \BadFaith\Accept();
+        $accept = new Accept($this->acceptSplit[0]);
+        $expected = new Accept();
         $expected->pref = 'text/html';
         $expected->params = array('level' => '2');
         $expected->q = 0.7;

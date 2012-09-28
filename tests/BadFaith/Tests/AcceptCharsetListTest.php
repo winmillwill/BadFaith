@@ -33,6 +33,7 @@
 
 namespace BadFaith\Tests;
 
+use BadFaith\AcceptEncoding;
 use BadFaith\AcceptEncodingList;
 use BadFaith\ItemContainer;
 
@@ -58,7 +59,7 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
         $this->encodingParsed = new ItemContainer;
 
         $this->encodingParsed->insert(
-            \BadFaith\AcceptEncoding::__set_state(
+            AcceptEncoding::__set_state(
                 array(
                     'pref' => 'gzip',
                     'encoding' => 'gzip',
@@ -69,7 +70,7 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->encodingParsed->insert(
-            \BadFaith\AcceptEncoding::__set_state(
+            AcceptEncoding::__set_state(
                 array(
                     'pref' => 'deflate',
                     'encoding' => 'deflate',
@@ -80,7 +81,7 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->encodingParsed->insert(
-            \BadFaith\AcceptEncoding::__set_state(
+            AcceptEncoding::__set_state(
                 array(
                     'pref' => 'sdch',
                     'encoding' => 'sdch',
@@ -95,7 +96,7 @@ class AcceptEncodingListTest extends \PHPUnit_Framework_TestCase
     {
         $expected = $this->encodingParsed;
         $encoding = $this->headers['acceptEncoding'];
-        $list = new \BadFaith\AcceptEncodingList($encoding);
+        $list = new AcceptEncodingList($encoding);
         $this->assertEquals($expected, $list->items);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BadFaith\Tests;
 
-use VariantList;
+use BadFaith\VariantList;
 
 class VariantListTest extends \PHPUnit_Framework_TestCase
 {
@@ -42,11 +42,11 @@ class VariantListTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testInit() {
-        $var = new \BadFaith\VariantList($this->variantDicts);
+        $var = new VariantList($this->variantDicts);
     }
 
     public function testPrefHash() {
-        $var = new \BadFaith\VariantList($this->variantDicts);
+        $var = new VariantList($this->variantDicts);
         $mimeHash = $var->getPrefHash('mime');
     }
 }

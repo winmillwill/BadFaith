@@ -33,7 +33,7 @@
 
 namespace BadFaith\Tests;
 
-use AcceptLike;
+use BadFaith\AcceptLike;
 
 class AcceptLikeTest extends \PHPUnit_Framework_TestCase
 {
@@ -68,28 +68,28 @@ class AcceptLikeTest extends \PHPUnit_Framework_TestCase
 
     public function testPrefParamSplit() {
         $prefParamListStr = $this->acceptSplit[0];
-        $this->assertEquals($this->acceptPrefParamSplit, \BadFaith\AcceptLike::prefParamSplit($prefParamListStr));
+        $this->assertEquals($this->acceptPrefParamSplit, AcceptLike::prefParamSplit($prefParamListStr));
     }
 
     public function testParamListParse() {
         $paramListStr = $this->acceptPrefParamSplit['params'];
         $expected = $this->acceptPrefParamsParsed['params'];
-        $this->assertEquals($expected, \BadFaith\AcceptLike::paramListParse($paramListStr));
+        $this->assertEquals($expected, AcceptLike::paramListParse($paramListStr));
     }
 
     public function testInitWithStr() {
         $accept = $this->acceptSplit[0];
-        $expected = new \BadFaith\AcceptLike();
+        $expected = new AcceptLike();
         $expected->pref = 'text/html';
         $expected->params = array('level' => 2);
         $expected->q = 0.7;
-        $expected = \Badfaith\AcceptLike::__set_state(
+        $expected = AcceptLike::__set_state(
             array(
                 'pref' => 'text/html',
                 'params' => array('level' => 2),
                 'q' => 0.7,
             )
         );
-        $this->assertEquals($expected, new \Badfaith\AcceptLike($accept));
+        $this->assertEquals($expected, new AcceptLike($accept));
     }
 }

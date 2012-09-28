@@ -33,7 +33,8 @@
 
 namespace BadFaith\Tests;
 
-use AcceptLanguageList;
+use BadFaith\AcceptLanguageList;
+use BadFaith\AcceptLanguage;
 use BadFaith\ItemContainer;
 
 class AcceptLanguageListTest extends \PHPUnit_Framework_TestCase
@@ -57,7 +58,7 @@ class AcceptLanguageListTest extends \PHPUnit_Framework_TestCase
         $this->languageParsed = new ItemContainer;
 
         $this->languageParsed->insert(
-            \BadFaith\AcceptLanguage::__set_state(
+            AcceptLanguage::__set_state(
                 array(
                     'pref' => 'en-US',
                     'lang' => 'en',
@@ -69,7 +70,7 @@ class AcceptLanguageListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->languageParsed->insert(
-            \BadFaith\AcceptLanguage::__set_state(
+            AcceptLanguage::__set_state(
                 array(
                     'pref' => 'en',
                     'lang' => 'en',
@@ -84,7 +85,7 @@ class AcceptLanguageListTest extends \PHPUnit_Framework_TestCase
     {
         $expected = $this->languageParsed;
         $encoding = $this->headers['acceptLanguage'];
-        $list = new \BadFaith\AcceptLanguageList($encoding);
+        $list = new AcceptLanguageList($encoding);
         $this->assertEquals($expected, $list->items);
     }
 }

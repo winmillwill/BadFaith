@@ -2,7 +2,7 @@
 
 namespace BadFaith\Tests;
 
-use Variant;
+use BadFaith\Variant;
 
 class VariantTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,6 +20,6 @@ class VariantTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testInit() {
-        $var = new \BadFaith\Variant($this->variantDict);
+        $var = new Variant($this->variantDict);
     }
 }
