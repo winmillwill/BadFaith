@@ -4,13 +4,11 @@ namespace BadFaith\Tests;
 
 use BadFaith\ItemContainer;
 
-    // In case autoloading is not present
-//    require __DIR__ . '/ItemStub.php';
-
 /**
  * @covers BadFaith\ItemContainer
  */
-class ItemContainerTest extends \PHPUnit_Framework_TestCase {
+class ItemContainerTest extends \PHPUnit_Framework_TestCase
+{
     public function itemProvider()
     {
         return array(

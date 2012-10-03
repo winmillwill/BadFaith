@@ -42,7 +42,7 @@ class AcceptCharset extends AcceptLike
     /**
      * @param string|null $headerStr the raw test of the header string or null
      */
-    function __construct($headerStr = null)
+    public function __construct($headerStr = null)
     {
         parent::__construct($headerStr);
         $this->init();
@@ -51,7 +51,7 @@ class AcceptCharset extends AcceptLike
     /**
      * Initializes attributes unique to this subclass.
      */
-    function init()
+    public function init()
     {
         $this->charset = $this->pref;
     }

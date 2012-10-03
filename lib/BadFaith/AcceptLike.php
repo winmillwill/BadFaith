@@ -39,15 +39,13 @@ class AcceptLike implements AcceptItemInterface
     public $q;
 
     /**
-     * @param string|null $headerStr the raw test of the header string or null
+     * @param string|null $headerIsh the raw test of the header string or null
      */
-    function __construct($headerIsh = NULL)
+    public function __construct($headerIsh = null)
     {
-        if (is_array($headerIsh))
-        {
+        if (is_array($headerIsh)) {
             $this->initWithDict($headerIsh);
-        }
-        else {
+        } else {
             $this->initWithStr($headerIsh);
         }
     }
@@ -70,17 +68,19 @@ class AcceptLike implements AcceptItemInterface
 
     /**
      * @param array $properties the array this method always gets
+     * @return AcceptLike
      */
-    static function __set_state(array $properties)
+    public static function __set_state(array $properties)
     {
         $acceptLike = new static($properties);
+
         return $acceptLike;
     }
 
     /**
      * @param string $headerStr the raw header text
      */
-    function initWithStr($headerStr)
+    public function initWithStr($headerStr)
     {
         $tuple = self::prefParamSplit($headerStr);
         $tuple['params'] = self::paramListParse($tuple['params']);
@@ -94,7 +94,7 @@ class AcceptLike implements AcceptItemInterface
     /**
      * @param array $headerDict a dictionary representation of a header field.
      */
-    function initWithDict(array $headerDict)
+    public function initWithDict(array $headerDict)
     {
         foreach ($headerDict as $key=>$prop) {
             if (property_exists($this, $key)) {
@@ -106,11 +106,13 @@ class AcceptLike implements AcceptItemInterface
     /**
      * Given an Accept* request-header field preference string, returns an array
      * representing a preference-parameters tuple
+     *
      * @see prefSplit
-     * @param string $prefParamListStr pref with ';' delimited list of param=val
+     *
+     * @param  string $prefParamListStr pref with ';' delimited list of param=val
      * @return array
      */
-    static function prefParamSplit($prefParamListStr)
+    public static function prefParamSplit($prefParamListStr)
     {
         $parts = explode(';', $prefParamListStr, 2);
         $parts = array_map('trim', $parts);
@@ -118,26 +120,29 @@ class AcceptLike implements AcceptItemInterface
             $parts[1] = '';
         }
         reset($parts);
+
         return array('pref' => $parts[0], 'params' => $parts[1]);
     }
 
     /**
      * Given an Accept* request-header field preference parameter list string,
      * returns an array of values keyed by parameter name.
+     *
      * @see prefParamSplit
-     * @param string $paramListStr ';' delimited list of param=val
+     *
+     * @param  string $paramListStr ';' delimited list of param=val
      * @return array
      */
-    static function paramListParse($paramListStr)
+    public static function paramListParse($paramListStr)
     {
         $paramsUrlStyle = strtr($paramListStr, ';', '&');
         parse_str($paramsUrlStyle, $params);
         if (array_key_exists('q', $params)) {
-            (float) $params['q'];
-        }
-        else {
+            $params['q'] = (float) $params['q'];
+        } else {
             $params['q'] = 1.0;
         }
+
         return $params;
     }
 }

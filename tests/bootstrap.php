@@ -9,17 +9,8 @@
  * file that was distributed with this source code.
  */
 
-spl_autoload_register(function ($class) {
-    if (0 === strpos(ltrim($class, '/'), 'BadFaith')) {
-        if (file_exists($file = __DIR__.'/../lib/BadFaith'.substr(str_replace('\\', '/', $class), strlen('BadFaith')).'.php')) {
-            require_once $file;
-        }
-        elseif (file_exists($file = __DIR__.'/../tests/BadFaith'.substr(str_replace('\\', '/', $class), strlen('BadFaith')).'.php')) {
-            require_once $file;
-        }
-    }
-});
+error_reporting(E_ALL);
 
-if (file_exists($loader = __DIR__.'/../vendor/autoload.php')) {
-    require_once $loader;
-}
+$loader = require __DIR__.'/../vendor/autoload.php';
+$loader->add('BadFaith\Tests', __DIR__);
+Ladybug\Loader::loadHelpers();

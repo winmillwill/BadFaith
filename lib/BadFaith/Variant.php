@@ -10,22 +10,21 @@ class Variant
     /**
      * @return mixed
      */
-    function getIdentifier()
+    public function getIdentifier()
     {
         return $this->identifier;
     }
 
     /**
-     * @param array $dict a dictionary of the dictionaries used to init
+     * @param array $dictOfDicts a dictionary of the dictionaries used to init
      * constituent types.
      */
-    function __construct($dictOfDicts)
+    public function __construct(array $dictOfDicts)
     {
         foreach ($dictOfDicts as $dimension => $dict) {
             if ($dimension == 'mime') {
                 $class = get_class(new Accept());
-            }
-            else {
+            } else {
                 $class = '\\' . __NAMESPACE__ . '\\' . (class_exists(ucwords($dimension)) ? ucwords($dimension) : 'AcceptLike');
             }
             $this->accepts[$dimension] = new $class($dict);
@@ -33,14 +32,15 @@ class Variant
     }
 
     /**
-     * @return array
+     * @param string|null $dimension
+     * @return mixed
      */
-    function getAccepts($dimension = NULL)
+    public function getAccepts($dimension = NULL)
     {
-        if ($dimension)
-        {
+        if ($dimension) {
             return $this->accepts[$dimension];
         }
+
         return $this->accepts;
     }
 }

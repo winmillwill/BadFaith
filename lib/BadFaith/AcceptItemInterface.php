@@ -7,10 +7,10 @@ interface AcceptItemInterface
     /**
      * @return string
      */
-    function getPref();
+    public function getPref();
 
     /**
      * @return double
      */
-    function getQuality();
+    public function getQuality();
 }

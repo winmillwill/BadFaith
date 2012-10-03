@@ -2,11 +2,12 @@
 
 namespace BadFaith\Tests;
 
-use Variant;
+use BadFaith\Variant;
 
 class VariantTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp() {
+    public function setUp()
+    {
         $this->variantDict = array(
             'language' => array(
                 'pref' => 'en',
@@ -19,7 +20,8 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testInit() {
-        $var = new \BadFaith\Variant($this->variantDict);
+    public function testInit()
+    {
+        $var = new Variant($this->variantDict);
     }
 }

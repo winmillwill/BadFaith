@@ -33,11 +33,12 @@
 
 namespace BadFaith\Tests;
 
-use AcceptLanguage;
+use BadFaith\AcceptLanguage;
 
 class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp() {
+    public function setUp()
+    {
         $this->headers = array (
             'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'acceptEncoding' => 'gzip,deflate,sdch',
@@ -50,19 +51,20 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testInitWithString() {
-        $accept = new \BadFaith\AcceptLanguage($this->acceptLanguageSplit[0]);
-        $expected = new \BadFaith\AcceptLanguage();
+    public function testInitWithString()
+    {
+        $accept = new AcceptLanguage($this->acceptLanguageSplit[0]);
+        $expected = new AcceptLanguage();
         $expected->pref = 'en-US';
         $expected->params = array();
         $expected->q = 1.0;
         $expected->lang = 'en';
-        $expected->sublang = 'US';
+        $expected->subLang = 'US';
         $this->assertEquals($expected, $accept);
-        $accept = new \BadFaith\AcceptLanguage($this->acceptLanguageSplit[1]);
+        $accept = new AcceptLanguage($this->acceptLanguageSplit[1]);
         $expected->pref = 'en';
         $expected->lang = 'en';
-        $expected->sublang = NULL;
+        $expected->subLang = null;
         $expected->q = 0.8;
         $this->assertEquals($expected, $accept);
     }

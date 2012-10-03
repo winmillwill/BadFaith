@@ -42,7 +42,7 @@ class AcceptEncoding extends AcceptLike
     /**
      * @param string|null $headerStr the raw test of the header string or null
      */
-    function __construct($headerStr = NULL)
+    public function __construct($headerStr = NULL)
     {
         parent::__construct($headerStr);
         $this->init();
@@ -51,7 +51,7 @@ class AcceptEncoding extends AcceptLike
     /**
      * Initializes attributes unique to this subclass.
      */
-    function init()
+    public function init()
     {
         $this->encoding = $this->pref;
     }

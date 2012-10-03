@@ -43,14 +43,15 @@ class AcceptLikeList
 
     /**
      * Calls the appropriate initializer.
-     * @param string|null $headerStr
+     *
+     * @param string|null $headerIsh
      */
     public function __construct($headerIsh = null)
     {
         if (is_string($headerIsh)) {
             $this->initWithStr($headerIsh);
         } elseif (is_array($headerIsh)) {
-           $this->initWithArray($headerIshList);
+            $this->initWithArray($headerIsh);
         }
     }
 
@@ -64,6 +65,7 @@ class AcceptLikeList
 
     /**
      * Helper for initializing with a string.
+     *
      * @param string $headerStr
      */
     public function initWithStr($headerStr)
@@ -73,9 +75,10 @@ class AcceptLikeList
 
     /**
      * Helper for initializing with an array.
+     *
      * @param array $headerIshList
      */
-    public function initWithArray($headerIshList)
+    public function initWithArray(array $headerIshList)
     {
         $this->items = self::initList($headerIshList);
     }
@@ -83,19 +86,22 @@ class AcceptLikeList
     /**
      * Given an Accept* request-header string, returns an array of AcceptLike
      * objects.
-     * @param string $headerStr
+     *
+     * @param  string        $headerStr
      * @return ItemContainer
      */
     public static function prefParse($headerStr)
     {
         $parts = self::prefSplit($headerStr);
+
         return self::initList($parts);
     }
 
     /**
+     * @param array $acceptIshes
      * @return ItemContainer with proper element classes for members.
      */
-    static function initList($acceptIshes)
+    public static function initList(array $acceptIshes)
     {
         $items = new ItemContainer();
         $class = self::elementClass();
@@ -109,9 +115,9 @@ class AcceptLikeList
 
     /**
      * Provides the class name of the constituent list elements in overridable
-     * static context..
-     * @param string $headerStr
-     * @return array
+     * static context.
+     *
+     * @return string
      */
     protected static function elementClass()
     {
@@ -123,7 +129,8 @@ class AcceptLikeList
     /**
      * Given an Accept* request-header field string, returns an array of
      * preference with parameters strings.
-     * @param string $prefWithParams ',' delimited list of prefs with params
+     *
+     * @param  string $prefWithParams ',' delimited list of prefs with params
      * @return array
      */
     public static function prefSplit($prefWithParams)

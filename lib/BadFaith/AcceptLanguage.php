@@ -33,17 +33,19 @@ namespace BadFaith;
  */
 class AcceptLanguage extends AcceptLike
 {
-
     public $pref;
     public $params;
     public $q;
     public $type;
     public $subtype;
 
+    public $lang;
+    public $subLang;
+
     /**
      * @param string|null $headerStr the raw test of the header string or null
      */
-    function __construct($headerStr = NULL)
+    public function __construct($headerStr = NULL)
     {
         parent::__construct($headerStr);
         $this->init();
@@ -52,13 +54,13 @@ class AcceptLanguage extends AcceptLike
     /**
      * Initializes attributes unique to this subclass.
      */
-    function init()
+    public function init()
     {
         $parts = explode('-', $this->pref, 2);
         if (!array_key_exists(1, $parts)) {
             $parts[1] = null;
         }
         $this->lang = $parts[0];
-        $this->sublang = $parts[1];
+        $this->subLang = $parts[1];
     }
 }

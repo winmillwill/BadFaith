@@ -33,7 +33,8 @@
 
 namespace BadFaith\Tests;
 
-use AcceptList;
+use BadFaith\Accept;
+use BadFaith\AcceptList;
 use BadFaith\ItemContainer;
 
 class AcceptListTest extends \PHPUnit_Framework_TestCase
@@ -60,7 +61,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         $this->acceptParsed = new ItemContainer;
 
         $this->acceptParsed->insert(
-            new \BadFaith\Accept(
+            new Accept(
                 array(
                     'pref' => 'text/html',
                     'params' => array('level' => '2'),
@@ -72,7 +73,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->acceptParsed->insert(
-            new \BadFaith\Accept(
+            new Accept(
                 array(
                     'pref' => 'text/html',
                     'params' => array(),
@@ -84,7 +85,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->acceptParsed->insert(
-            new \BadFaith\Accept(
+            new Accept(
                 array(
                     'pref' => 'application/xhtml+xml',
                     'params' => array(),
@@ -96,7 +97,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->acceptParsed->insert(
-            new \BadFaith\Accept(
+            new Accept(
                 array(
                     'pref' => 'application/xml',
                     'params' => array(),
@@ -108,7 +109,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->acceptParsed->insert(
-            new \BadFaith\Accept(
+            new Accept(
                 array(
                     'pref' => '*/*',
                     'params' => array(),
@@ -124,7 +125,7 @@ class AcceptListTest extends \PHPUnit_Framework_TestCase
     {
         $expected = $this->acceptParsed;
         $accept = $this->headers['accept'];
-        $list = new \BadFaith\AcceptList($accept);
+        $list = new AcceptList($accept);
         $this->assertEquals($expected, $list->items);
     }
 }
