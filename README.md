@@ -30,7 +30,7 @@ The Ideal API
   echo $best_encoding; //Outputs 'gzip'.
 
   //Get what would suit the UA best in all dimensions:
-  $best_all = $negotatiator->getPreferred();
+  $best_all = $negotiator->getPreferred();
   var_export($best_all)
   //Outputs
   array(
