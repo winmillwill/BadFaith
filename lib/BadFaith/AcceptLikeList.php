@@ -43,6 +43,7 @@ class AcceptLikeList
 
     /**
      * Calls the appropriate initializer.
+     *
      * @param string|null $headerStr
      */
     public function __construct($headerIsh = null)
@@ -50,7 +51,7 @@ class AcceptLikeList
         if (is_string($headerIsh)) {
             $this->initWithStr($headerIsh);
         } elseif (is_array($headerIsh)) {
-           $this->initWithArray($headerIshList);
+           $this->initWithArray($headerIsh);
         }
     }
 
