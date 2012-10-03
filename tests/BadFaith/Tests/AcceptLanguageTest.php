@@ -59,12 +59,12 @@ class AcceptLanguageTest extends \PHPUnit_Framework_TestCase
         $expected->params = array();
         $expected->q = 1.0;
         $expected->lang = 'en';
-        $expected->sublang = 'US';
+        $expected->subLang = 'US';
         $this->assertEquals($expected, $accept);
         $accept = new AcceptLanguage($this->acceptLanguageSplit[1]);
         $expected->pref = 'en';
         $expected->lang = 'en';
-        $expected->sublang = NULL;
+        $expected->subLang = null;
         $expected->q = 0.8;
         $this->assertEquals($expected, $accept);
     }
