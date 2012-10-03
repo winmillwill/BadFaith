@@ -4,7 +4,8 @@
   "license": "MIT",
   "description": "Accept-* Header parsing for PHP",
   "require": {
-      "php": ">=5.3.0"
+      "php": ">=5.3.0",
+        "raulfraile/ladybug": "dev-master"
   },
   "autoload": {
     "psr-0": { "BadFaith": "lib/"}
