@@ -40,6 +40,9 @@ class AcceptLanguage extends AcceptLike
     public $type;
     public $subtype;
 
+    public $lang;
+    public $subLang;
+
     /**
      * @param string|null $headerStr the raw test of the header string or null
      */
@@ -59,6 +62,6 @@ class AcceptLanguage extends AcceptLike
             $parts[1] = null;
         }
         $this->lang = $parts[0];
-        $this->sublang = $parts[1];
+        $this->subLang = $parts[1];
     }
 }
