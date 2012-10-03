@@ -49,6 +49,7 @@ class Negotiator
 
     /**
      * Constructor that initializes with given dict or $_SERVER.
+     *
      * @param array $headers  a dict of header strings
      * @param array $variants What the service can provide
      */
@@ -79,6 +80,8 @@ class Negotiator
 
     /**
      * Sets properties using the constructor arg.
+     *
+     * @param array $arg
      */
     public function headersFromArg(array $arg)
     {
@@ -92,6 +95,9 @@ class Negotiator
         }
     }
 
+    /**
+     * @param array $arg
+     */
     public function variantsFromArg(array $arg)
     {
         $this->variants = new VariantList($arg);
@@ -100,8 +106,9 @@ class Negotiator
     /**
      * Maps the type of header field to the list class that will hold its
      * entries.
+     *
      * @param $type string the key of the literals array
-     * @return the namespaced classname
+     * @return string the namespaced classname
      */
     public function listClass($type)
     {

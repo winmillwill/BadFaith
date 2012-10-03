@@ -15,6 +15,9 @@ class VariantList implements \IteratorAggregate, \Countable
       $this->init($variants);
     }
 
+    /**
+     * @param array $variants
+     */
     public function init(array $variants)
     {
         $this->items = new \ArrayIterator();
@@ -23,6 +26,10 @@ class VariantList implements \IteratorAggregate, \Countable
         }
     }
 
+    /**
+     * @param string $key
+     * @param array $variant
+     */
     public function set($key, $variant)
     {
         $this->items[$key] = new Variant($variant);
@@ -36,6 +43,10 @@ class VariantList implements \IteratorAggregate, \Countable
         return $this->items;
     }
 
+    /**
+     * @param string $dimension
+     * @return mixed
+     */
     public function getPrefHash($dimension)
     {
         if (empty($this->prefHashes[$dimension])) {
@@ -47,6 +58,9 @@ class VariantList implements \IteratorAggregate, \Countable
         return $this->prefHashes[$dimension];
     }
 
+    /**
+     * @return array
+     */
     public function getPrefHashes()
     {
         $hashes = array();

@@ -16,10 +16,10 @@ class Variant
     }
 
     /**
-     * @param array $dict a dictionary of the dictionaries used to init
+     * @param array $dictOfDicts a dictionary of the dictionaries used to init
      * constituent types.
      */
-    public function __construct($dictOfDicts)
+    public function __construct(array $dictOfDicts)
     {
         foreach ($dictOfDicts as $dimension => $dict) {
             if ($dimension == 'mime') {
@@ -32,7 +32,8 @@ class Variant
     }
 
     /**
-     * @return array
+     * @param string|null $dimension
+     * @return mixed
      */
     public function getAccepts($dimension = NULL)
     {
