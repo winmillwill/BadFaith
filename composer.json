@@ -1,13 +1,15 @@
 {
-  "name": "BadFaith/BadFaith",
-  "type": "library",
-  "license": "MIT",
-  "description": "Accept-* Header parsing for PHP",
-  "require": {
-      "php": ">=5.3.0",
+    "name": "BadFaith/BadFaith",
+    "type": "library",
+    "license": "MIT",
+    "description": "Accept-* Header parsing for PHP",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
         "raulfraile/ladybug": "dev-master"
-  },
-  "autoload": {
-    "psr-0": { "BadFaith": "lib/"}
-  }
+    },
+    "autoload": {
+        "psr-0": { "BadFaith": "lib/"}
+    }
 }
