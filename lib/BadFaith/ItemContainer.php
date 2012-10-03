@@ -45,6 +45,7 @@ class ItemContainer implements \IteratorAggregate, \Countable
     /**
      * @param $value1 AcceptItemInterface
      * @param $value2 AcceptItemInterface
+     * @return integer
      */
     protected function compare($value1, $value2)
     {

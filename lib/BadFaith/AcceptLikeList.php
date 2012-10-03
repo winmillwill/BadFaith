@@ -44,7 +44,7 @@ class AcceptLikeList
     /**
      * Calls the appropriate initializer.
      *
-     * @param string|null $headerStr
+     * @param string|null $headerIsh
      */
     public function __construct($headerIsh = null)
     {

@@ -33,7 +33,6 @@ namespace BadFaith;
  */
 class AcceptLanguage extends AcceptLike
 {
-
     public $pref;
     public $params;
     public $q;
