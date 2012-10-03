@@ -39,9 +39,9 @@ class AcceptLike implements AcceptItemInterface
     public $q;
 
     /**
-     * @param string|null $headerStr the raw test of the header string or null
+     * @param string|null $headerIsh the raw test of the header string or null
      */
-    public function __construct($headerIsh = NULL)
+    public function __construct($headerIsh = null)
     {
         if (is_array($headerIsh)) {
             $this->initWithDict($headerIsh);
@@ -68,6 +68,7 @@ class AcceptLike implements AcceptItemInterface
 
     /**
      * @param array $properties the array this method always gets
+     * @return AcceptLike
      */
     public static function __set_state(array $properties)
     {
@@ -105,7 +106,9 @@ class AcceptLike implements AcceptItemInterface
     /**
      * Given an Accept* request-header field preference string, returns an array
      * representing a preference-parameters tuple
+     *
      * @see prefSplit
+     *
      * @param  string $prefParamListStr pref with ';' delimited list of param=val
      * @return array
      */
@@ -124,7 +127,9 @@ class AcceptLike implements AcceptItemInterface
     /**
      * Given an Accept* request-header field preference parameter list string,
      * returns an array of values keyed by parameter name.
+     *
      * @see prefParamSplit
+     *
      * @param  string $paramListStr ';' delimited list of param=val
      * @return array
      */
@@ -133,7 +138,7 @@ class AcceptLike implements AcceptItemInterface
         $paramsUrlStyle = strtr($paramListStr, ';', '&');
         parse_str($paramsUrlStyle, $params);
         if (array_key_exists('q', $params)) {
-            (float) $params['q'];
+            $params['q'] = (float) $params['q'];
         } else {
             $params['q'] = 1.0;
         }
