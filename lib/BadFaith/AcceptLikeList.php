@@ -83,19 +83,20 @@ class AcceptLikeList
     /**
      * Given an Accept* request-header string, returns an array of AcceptLike
      * objects.
-     * @param string $headerStr
+     * @param  string        $headerStr
      * @return ItemContainer
      */
     public static function prefParse($headerStr)
     {
         $parts = self::prefSplit($headerStr);
+
         return self::initList($parts);
     }
 
     /**
      * @return ItemContainer with proper element classes for members.
      */
-    static function initList($acceptIshes)
+    public static function initList($acceptIshes)
     {
         $items = new ItemContainer();
         $class = self::elementClass();
@@ -110,7 +111,7 @@ class AcceptLikeList
     /**
      * Provides the class name of the constituent list elements in overridable
      * static context..
-     * @param string $headerStr
+     * @param  string $headerStr
      * @return array
      */
     protected static function elementClass()
@@ -123,7 +124,7 @@ class AcceptLikeList
     /**
      * Given an Accept* request-header field string, returns an array of
      * preference with parameters strings.
-     * @param string $prefWithParams ',' delimited list of prefs with params
+     * @param  string $prefWithParams ',' delimited list of prefs with params
      * @return array
      */
     public static function prefSplit($prefWithParams)

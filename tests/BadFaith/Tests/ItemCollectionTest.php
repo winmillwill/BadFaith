@@ -7,7 +7,8 @@ use BadFaith\ItemContainer;
 /**
  * @covers BadFaith\ItemContainer
  */
-class ItemContainerTest extends \PHPUnit_Framework_TestCase {
+class ItemContainerTest extends \PHPUnit_Framework_TestCase
+{
     public function itemProvider()
     {
         return array(

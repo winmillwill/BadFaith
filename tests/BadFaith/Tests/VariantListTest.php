@@ -6,7 +6,8 @@ use BadFaith\VariantList;
 
 class VariantListTest extends \PHPUnit_Framework_TestCase
 {
-    public function setUp() {
+    public function setUp()
+    {
         $this->variantDicts = array(
               'var1' => array(
                   'language' => array(
@@ -41,11 +42,13 @@ class VariantListTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testInit() {
+    public function testInit()
+    {
         $var = new VariantList($this->variantDicts);
     }
 
-    public function testPrefHash() {
+    public function testPrefHash()
+    {
         $var = new VariantList($this->variantDicts);
         $mimeHash = $var->getPrefHash('mime');
     }

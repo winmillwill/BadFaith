@@ -38,7 +38,8 @@ use BadFaith\Accept;
 class AcceptTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function setUp() {
+    public function setUp()
+    {
         $this->headers = array (
             'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'acceptEncoding' => 'gzip,deflate,sdch',
@@ -66,7 +67,8 @@ class AcceptTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testInitWithString() {
+    public function testInitWithString()
+    {
         $accept = new Accept($this->acceptSplit[0]);
         $expected = new Accept();
         $expected->pref = 'text/html';

@@ -40,7 +40,7 @@ class Negotiator
 
     public $variants = array();
 
-    static protected $keys = array(
+    protected static $keys = array(
         'accept'          => '',
         'accept_charset'  => 'utf-8',
         'accept_encoding' => '',
@@ -49,10 +49,10 @@ class Negotiator
 
     /**
      * Constructor that initializes with given dict or $_SERVER.
-     * @param array $headers a dict of header strings
+     * @param array $headers  a dict of header strings
      * @param array $variants What the service can provide
      */
-    function __construct($headers = array(), $variants = array())
+    public function __construct($headers = array(), $variants = array())
     {
         if (empty($headers)) {
             $this->headersFromGlobals();
@@ -66,7 +66,7 @@ class Negotiator
     /**
      * Sets properties using the $_SERVER array
      */
-    function headersFromGlobals()
+    public function headersFromGlobals()
     {
         $headers = array();
 
@@ -80,7 +80,7 @@ class Negotiator
     /**
      * Sets properties using the constructor arg.
      */
-    function headersFromArg(array $arg)
+    public function headersFromArg(array $arg)
     {
         foreach (static::$keys as $key => $default) {
             $value = array_key_exists($key, $arg) ? $arg[$key] : '';
@@ -92,7 +92,7 @@ class Negotiator
         }
     }
 
-    function variantsFromArg(array $arg)
+    public function variantsFromArg(array $arg)
     {
         $this->variants = new VariantList($arg);
     }
@@ -103,7 +103,7 @@ class Negotiator
      * @param $type string the key of the literals array
      * @return the namespaced classname
      */
-    function listClass($type)
+    public function listClass($type)
     {
         switch (strtoupper($type)) {
 
@@ -124,7 +124,7 @@ class Negotiator
         return __NAMESPACE__ . '\\' . $class;
     }
 
-    function apacheNegotiate()
+    public function apacheNegotiate()
     {
 
     }

@@ -11,6 +11,7 @@ class ItemContainer implements \IteratorAggregate, \Countable
         foreach ($this->items as $i => $check) {
             if (1 === $this->compare($item, $check)) {
                 array_splice($this->items, $i, 0, array($item));
+
                 return;
             }
         }
@@ -47,6 +48,6 @@ class ItemContainer implements \IteratorAggregate, \Countable
      */
     protected function compare($value1, $value2)
     {
-        return ((double)$value1->getQuality() <= (double)$value2->getQuality() ? -1 : 1);
+        return ((double) $value1->getQuality() <= (double) $value2->getQuality() ? -1 : 1);
     }
 }

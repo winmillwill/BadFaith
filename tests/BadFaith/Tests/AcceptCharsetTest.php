@@ -44,7 +44,8 @@ class AcceptCharsetTest extends \PHPUnit_Framework_TestCase
     /**
      * The PHPUnit setUp function
      */
-    public function setUp() {
+    public function setUp()
+    {
         $this->headers = array (
             'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'accept_encoding' => 'gzip,deflate,sdch',

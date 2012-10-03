@@ -44,7 +44,8 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
     /**
      * PHPUnit set up for fixtures
      */
-    public function setUp() {
+    public function setUp()
+    {
         $this->headers = array (
             'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'acceptEncoding' => 'gzip,deflate,sdch',
@@ -61,7 +62,8 @@ class AcceptEncodingTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests initialization.
      */
-    public function testInitWithString() {
+    public function testInitWithString()
+    {
         $acceptEncoding = new AE($this->acceptEncodingSplit[0]);
         $expected = new AE();
         $expected->pref = 'gzip';

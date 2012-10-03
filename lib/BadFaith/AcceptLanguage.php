@@ -43,7 +43,7 @@ class AcceptLanguage extends AcceptLike
     /**
      * @param string|null $headerStr the raw test of the header string or null
      */
-    function __construct($headerStr = NULL)
+    public function __construct($headerStr = NULL)
     {
         parent::__construct($headerStr);
         $this->init();
@@ -52,7 +52,7 @@ class AcceptLanguage extends AcceptLike
     /**
      * Initializes attributes unique to this subclass.
      */
-    function init()
+    public function init()
     {
         $parts = explode('-', $this->pref, 2);
         if (!array_key_exists(1, $parts)) {

@@ -42,7 +42,8 @@ class AcceptLikeListTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up our fixtures.
      */
-    public function setUp() {
+    public function setUp()
+    {
         $this->headers = array (
             'accept' => 'text/html;level=2;q=0.7,text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'acceptEncoding' => 'gzip,deflate,sdch',
@@ -110,13 +111,15 @@ class AcceptLikeListTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testPrefSplit() {
+    public function testPrefSplit()
+    {
         $accept = $this->headers['accept'];
         $expected = $this->acceptSplit;
         $this->assertEquals($expected, AcceptLikeList::prefSplit($accept));
     }
 
-    public function testInitWithHeaderString () {
+    public function testInitWithHeaderString ()
+    {
         $expected = $this->acceptParsed;
         $accept = $this->headers['accept'];
         $list = new AcceptLikeList($accept);

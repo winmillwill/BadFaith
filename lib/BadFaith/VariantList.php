@@ -18,8 +18,7 @@ class VariantList implements \IteratorAggregate, \Countable
     public function init(array $variants)
     {
         $this->items = new \ArrayIterator();
-        foreach ($variants as $key => $variant)
-        {
+        foreach ($variants as $key => $variant) {
             $this->set($key, $variant);
         }
     }
@@ -44,6 +43,7 @@ class VariantList implements \IteratorAggregate, \Countable
                 $this->prefHashes[$dimension][$variant->getAccepts($dimension)->getPref()][$key] = $variant;
             }
         }
+
         return $this->prefHashes[$dimension];
     }
 
@@ -53,6 +53,7 @@ class VariantList implements \IteratorAggregate, \Countable
         foreach ($this->prefHashes as $dimension => $hash) {
             $hashes[$dimension] = $this->getPrefHash($dimension);
         }
+
         return $hashes;
     }
 
