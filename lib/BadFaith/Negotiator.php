@@ -106,18 +106,19 @@ class Negotiator
     function listClass($type)
     {
         switch (strtoupper($type)) {
-        case 'ACCEPT':
-            $class = 'AcceptList';
-            break;
-        case 'ACCEPT_CHARSET':
-            $class = 'AcceptCharsetList';
-            break;
-        case 'ACCEPT_ENCODING':
-            $class = 'AcceptEncodingList';
-            break;
-        case 'ACCEPT_LANGUAGE':
-            $class = 'AcceptLanguageList';
-            break;
+
+            case 'ACCEPT':
+                $class = 'AcceptList';
+                break;
+            case 'ACCEPT_CHARSET':
+                $class = 'AcceptCharsetList';
+                break;
+            case 'ACCEPT_ENCODING':
+                $class = 'AcceptEncodingList';
+                break;
+            case 'ACCEPT_LANGUAGE':
+                $class = 'AcceptLanguageList';
+                break;
         }
 
         return __NAMESPACE__ . '\\' . $class;
@@ -125,5 +126,6 @@ class Negotiator
 
     function apacheNegotiate()
     {
+
     }
 }

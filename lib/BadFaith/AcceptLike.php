@@ -41,13 +41,11 @@ class AcceptLike implements AcceptItemInterface
     /**
      * @param string|null $headerStr the raw test of the header string or null
      */
-    function __construct($headerIsh = NULL)
+    public function __construct($headerIsh = NULL)
     {
-        if (is_array($headerIsh))
-        {
+        if (is_array($headerIsh)) {
             $this->initWithDict($headerIsh);
-        }
-        else {
+        } else {
             $this->initWithStr($headerIsh);
         }
     }

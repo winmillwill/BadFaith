@@ -43,7 +43,7 @@ class Accept extends AcceptLike
     /**
      * @param string|null $headerIsh the raw text of the header string or null
      */
-    function __construct($headerIsh = null)
+    public function __construct($headerIsh = null)
     {
         parent::__construct($headerIsh);
         $this->init();
@@ -52,7 +52,7 @@ class Accept extends AcceptLike
     /**
      * Initializes attributes unique to this subclass.
      */
-    function init()
+    public function init()
     {
         $parts = explode('/', $this->pref, 2);
         if (!array_key_exists(1, $parts)) {
