@@ -50,7 +50,7 @@ class AcceptLikeList
         if (is_string($headerIsh)) {
             $this->initWithStr($headerIsh);
         } elseif (is_array($headerIsh)) {
-           $this->initWithArray($headerIshList);
+           $this->initWithArray($headerIsh);
         }
     }
 
