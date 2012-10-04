@@ -133,7 +133,7 @@ class AcceptLike implements AcceptItemInterface
         $paramsUrlStyle = strtr($paramListStr, ';', '&');
         parse_str($paramsUrlStyle, $params);
         if (array_key_exists('q', $params)) {
-            (float) $params['q'];
+            $params['q'] = (float) $params['q'];
         }
         else {
             $params['q'] = 1.0;
